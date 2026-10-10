@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>刘晓东 · 运维自动化</title>
+<meta name="description" content="刘晓东：11 年企业 IT 运维，专注运维自动化、容器与 GitOps 交付。">
+<style>
+:root{
+  --night:#0a1220;--night2:#101b2e;--nline:#ffffff17;--ntext:#c3cfdf;--nmuted:#7f8ea3;
+  --paper:#f5f7fa;--card:#fff;--ink:#13213a;--muted:#5a6b80;--line:#dfe5ee;--soft:#eef2f7;
+  --mint:#35c9a6;--mintd:#16876f;--blue:#5b8cff;--amber:#f2b84b;--red:#ef6b6b;
+  --shadow:0 1px 2px #14244310,0 8px 24px #14244310;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0d1626;--card:#132036;--ink:#e3eaf4;--muted:#9aaabd;--line:#22324a;--soft:#1a2942;--mintd:#4fd8b6;--shadow:0 1px 2px #0006,0 8px 24px #0005}}
+:root[data-theme="dark"]{--paper:#0d1626;--card:#132036;--ink:#e3eaf4;--muted:#9aaabd;--line:#22324a;--soft:#1a2942;--mintd:#4fd8b6;--shadow:0 1px 2px #0006,0 8px 24px #0005}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 "Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.mono{font-family:"JetBrains Mono",Consolas,"Cascadia Mono",monospace}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:10;background:#0a1220d9;backdrop-filter:blur(10px);border-bottom:1px solid var(--nline)}
+.nav .wrap{display:flex;align-items:center;height:62px;gap:28px}
+.logo{font:700 15px Consolas,monospace;color:#fff;text-decoration:none;letter-spacing:.5px}
+.logo em{font-style:normal;color:var(--mint)}
+.nav nav{display:flex;gap:24px;margin-left:auto}
+.nav nav a{color:var(--ntext);text-decoration:none;font-size:14px}
+.nav nav a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:8px;padding:10px 18px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid transparent;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-mint{background:var(--mint);color:#062a22}
+.btn-ghost{border-color:#ffffff33;color:#fff}
+.btn-ghost:hover{background:#ffffff12}
+.nav .btn{padding:7px 14px}
+
+/* hero */
+.hero{background:radial-gradient(900px 500px at 85% 10%,#1b3a6a55,transparent 60%),radial-gradient(700px 400px at 0% 100%,#35c9a61f,transparent 60%),var(--night);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000 30%,transparent)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-top:88px;padding-bottom:96px}
+.eyebrow{font:12px Consolas,monospace;letter-spacing:2px;color:var(--mint);display:flex;align-items:center;gap:10px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px #35c9a633;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px #35c9a600}}
+h1{font-size:clamp(34px,4.6vw,56px);line-height:1.15;letter-spacing:-1px;margin:18px 0 20px;font-weight:700}
+h1 .hl{background:linear-gradient(90deg,var(--mint),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--ntext);font-size:17px;max-width:540px;margin:0 0 32px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.who{margin-top:36px;display:flex;align-items:center;gap:14px;color:var(--nmuted);font-size:13px}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#1e3a66,#35c9a6);display:grid;place-items:center;font-weight:700;color:#fff;font-size:16px}
+.who b{color:#fff;font-size:15px;display:block}
+
+/* pipeline console (Remotion Player placeholder) */
+.console{background:#0d1728ee;border:1px solid var(--nline);border-radius:14px;box-shadow:0 30px 80px #0008;overflow:hidden}
+.console-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--nline);font-size:12px;color:var(--nmuted)}
+.console-bar span{width:10px;height:10px;border-radius:50%;background:#ffffff1f}
+.console-bar .t{margin-left:8px}
+.console-bar .live{margin-left:auto;color:var(--mint)}
+.term{padding:14px 18px 6px;font-size:13px;color:var(--ntext);min-height:46px}
+.term .p{color:var(--mint)}
+.caret{display:inline-block;width:7px;height:15px;background:var(--mint);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.stages{list-style:none;margin:0;padding:6px 18px 8px}
+.stage{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:center;padding:9px 0;position:relative;opacity:.45;transition:opacity .3s}
+.stage:not(:last-child)::after{content:"";position:absolute;left:10px;top:31px;bottom:-9px;width:2px;background:#ffffff14}
+.stage .dot{width:22px;height:22px;border-radius:50%;border:2px solid #ffffff33;display:grid;place-items:center;font-size:12px;color:#062a22;transition:all .3s}
+.stage .name{font-size:14px;color:#fff}
+.stage .name small{display:block;font-size:11.5px;color:var(--nmuted);font-family:Consolas,monospace}
+.stage .st{font:12px Consolas,monospace;color:var(--nmuted)}
+.stage.run{opacity:1}
+.stage.run .dot{border-color:var(--blue);border-top-color:transparent;animation:spin .8s linear infinite}
+.stage.run .st{color:var(--blue)}
+.stage.ok{opacity:1}
+.stage.ok .dot{background:var(--mint);border-color:var(--mint)}
+.stage.ok .dot::before{content:"✓";font-weight:700}
+.stage.ok .st{color:var(--mint)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.result{margin:4px 18px 16px;padding:12px 14px;border-radius:10px;background:#35c9a614;border:1px solid #35c9a633;display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(6px);transition:all .4s}
+.result.show{opacity:1;transform:none}
+.result .txt{font-size:13px;color:var(--ntext);flex:1}
+.result .txt b{color:#fff;display:block;font-size:14px}
+.pods{display:flex;gap:5px}
+.pods i{width:14px;height:14px;border-radius:4px;background:var(--mint)}
+.console-note{font-size:11.5px;color:var(--nmuted);text-align:right;margin-top:10px}
+
+/* stats */
+.stats{background:var(--night2);border-top:1px solid var(--nline);color:#fff}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:28px 20px;border-left:1px solid var(--nline)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat b{font-size:34px;font-weight:700;letter-spacing:-1px;display:block;line-height:1.2}
+.stat b sup{font-size:16px;color:var(--mint);margin-left:2px}
+.stat span{font-size:13px;color:var(--nmuted)}
+
+/* sections */
+section.block{padding:96px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.kicker{font:12px Consolas,monospace;letter-spacing:2px;color:var(--mintd)}
+h2{font-size:clamp(26px,3vw,34px);letter-spacing:-.5px;line-height:1.25;margin:8px 0 0}
+.sec-head p{color:var(--muted);max-width:440px;margin:0;font-size:15px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+
+/* projects */
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;text-decoration:none;transition:transform .2s,border-color .2s}
+.proj:hover{transform:translateY(-3px);border-color:var(--mint)}
+.proj .tag{font:11.5px Consolas,monospace;color:var(--mintd);letter-spacing:1px}
+.proj h3{font-size:20px;margin:8px 0 8px;line-height:1.35}
+.proj p{color:var(--muted);font-size:14.5px;margin:0 0 16px}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0 0 18px;font:12px Consolas,monospace}
+.flow span{background:var(--soft);border-radius:6px;padding:3px 8px;color:var(--ink)}
+.flow em{font-style:normal;color:var(--mintd)}
+.proj .pit{font-size:13px;color:var(--muted);border-left:2px solid var(--amber);padding-left:10px;margin-top:auto}
+.proj .pit b{color:var(--ink)}
+.proj .more{margin-top:16px;font-size:14px;font-weight:600;color:var(--mintd)}
+
+/* services */
+.svc-band{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.svc{background:var(--card);padding:28px}
+.svc .ic{width:40px;height:40px;border-radius:10px;background:var(--soft);display:grid;place-items:center;color:var(--mintd);margin-bottom:16px}
+.svc h3{font-size:17px;margin:0 0 6px}
+.svc p{font-size:14px;color:var(--muted);margin:0}
+.svc .for{font-size:12px;color:var(--mintd);margin-top:10px}
+
+/* stack + journey */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.stack-row{display:grid;grid-template-columns:76px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.stack-row dt{font-weight:700;color:var(--mintd)}
+.stack-row dd{margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--soft);border-radius:999px;padding:2px 10px;font-size:13px}
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--line),var(--mint))}
+.timeline li{position:relative;padding:0 0 26px 34px}
+.timeline li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--card);border:3px solid var(--line)}
+.timeline li.now::before{border-color:var(--mint);box-shadow:0 0 0 5px #35c9a62a}
+.timeline time{font:12px Consolas,monospace;color:var(--muted)}
+.timeline b{display:block;font-size:16px;margin:2px 0}
+.timeline p{margin:0;font-size:14px;color:var(--muted)}
+
+/* contact */
+.contact{background:var(--night);color:#fff}
+.contact .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;padding-top:88px;padding-bottom:88px}
+.contact h2{color:#fff}
+.contact .lead{margin-top:16px}
+.ways{display:grid;gap:12px;margin-top:28px}
+.way{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--nline);border-radius:10px;color:var(--ntext);font-size:14px;text-decoration:none}
+.way b{color:#fff;display:block;font-size:15px}
+.qr{width:44px;height:44px;border-radius:6px;background:repeating-conic-gradient(#fff 0 25%,#0a1220 0 50%) 0 0/11px 11px;flex:none}
+form{background:#0f1a2c;border:1px solid var(--nline);border-radius:14px;padding:28px;display:grid;gap:14px}
+label{font-size:13px;color:var(--ntext);display:grid;gap:6px}
+input,select,textarea{font:inherit;font-size:14px;color:#fff;background:#0a1220;border:1px solid #ffffff22;border-radius:8px;padding:10px 12px}
+textarea{min-height:96px;resize:vertical}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:var(--nmuted)}
+footer{background:#070d18;color:var(--nmuted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:22px;padding-bottom:22px;flex-wrap:wrap}
+footer .ok{color:var(--mint)}
+
+@media (max-width:900px){
+  .hero .wrap,.two,.contact .wrap{grid-template-columns:1fr}
+  .hero .wrap{padding-top:56px;padding-bottom:64px;gap:40px}
+  .grid2{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr 1fr}
+  .stats .wrap{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .nav nav{display:none}
+  .nav .btn{margin-left:auto}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  .grid3,.frow{grid-template-columns:1fr}
+  section.block{padding:64px 0}
+  .stat{padding:20px 12px}
+  .stat b{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#">liuxd<em>.ops</em></a>
+    <nav>
+      <a href="#projects">项目</a><a href="#services">服务</a><a href="#journey">成长路线</a><a href="#">技术笔记</a><a href="#">简历</a>
+    </nav>
+    <a class="btn btn-mint" href="#contact">联系我</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow mono"><i></i>OPEN TO WORK · 济南 / 淄博 / 滨州</div>
+      <h1>把重复的运维工作，<br>变成<span class="hl">可复现的代码</span>。</h1>
+      <p class="lead">11 年企业 IT 运维，从 500 人工厂的机房和终端做起。现在专注运维自动化：Ansible 批量交付、Prometheus 监控告警、K8s 上的 GitOps 发布与回滚。</p>
+      <div class="cta">
+        <a class="btn btn-mint" href="#">下载简历 PDF</a>
+        <a class="btn btn-ghost" href="#projects">看项目案例 →</a>
+      </div>
+      <div class="who">
+        <div class="avatar">刘</div>
+        <div><b>刘晓东</b>运维工程师（自动化方向） · github.com/roccowork</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="console" aria-label="交付流水线演示动画">
+        <div class="console-bar"><span></span><span></span><span></span><em class="t mono">labapp · delivery pipeline</em><em class="live mono">● LIVE DEMO</em></div>
+        <div class="term mono"><span class="p">$</span> <span id="typed"></span><span class="caret"></span></div>
+        <ol class="stages" id="stages">
+          <li class="stage"><span class="dot"></span><div class="name">PR 检查<small>GitHub Actions · go test</small></div><span class="st">waiting</span></li>
+          <li class="stage"><span class="dot"></span><div class="name">构建镜像<small>Jenkins Pipeline</small></div><span class="st">waiting</span></li>
+          <li class="stage"><span class="dot"></span><div class="name">推送私有仓库<small>registry:5000/labapp</small></div><span class="st">waiting</span></li>
+          <li class="stage"><span class="dot"></span><div class="name">GitOps 同步<small>Argo CD · auto-sync</small></div><span class="st">waiting</span></li>
+          <li class="stage"><span class="dot"></span><div class="name">滚动更新<small>Kubernetes · maxUnavailable 0</small></div><span class="st">waiting</span></li>
+        </ol>
+        <div class="result" id="result">
+          <div class="txt"><b>已上线 labapp:42-a1b2c3d</b>Prometheus 监控中 · 出问题 git revert 一键回滚</div>
+          <div class="pods"><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="console-note">原型用 CSS 模拟；正式版改为 Remotion Player 渲染，同一份动画可导出 MP4 视频简历</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b data-n="11">0<sup>年</sup></b><span>企业 IT 运维经验</span></div>
+    <div class="stat"><b data-n="16">0<sup>个</sup></b><span>运维自动化实战项目</span></div>
+    <div class="stat"><b data-n="210">0<sup>+</sup></b><span>张过程截图，公开可查</span></div>
+    <div class="stat"><b data-n="500">0<sup>人</sup></b><span>企业 IT 基础设施负责</span></div>
+  </div>
+</div>
+
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="kicker">01 / PROJECTS</div><h2>精选项目案例</h2></div>
+      <p>全部在自己搭的 4 台虚拟机上从零做起，每个项目都有文档、配置、截图和踩坑记录。</p>
+    </div>
+    <div class="grid2">
+      <a class="proj reveal" href="#">
+        <span class="tag">CI/CD · GITOPS</span>
+        <h3>GitOps 持续交付流水线</h3>
+        <p>代码提交后自动测试、构建、部署；坏版本发布时旧 Pod 持续服务，git revert 即可回滚。</p>
+        <div class="flow"><span>Actions</span><em>→</em><span>Jenkins</span><em>→</em><span>Registry</span><em>→</em><span>Argo CD</span><em>→</em><span>K8s</span></div>
+        <div class="pit"><b>踩坑：</b>Argo CD 默认 Redis 镜像国内拉不动，改用 docker.io 源</div>
+        <span class="more">查看案例 →</span>
+      </a>
+      <a class="proj reveal" href="#">
+        <span class="tag">KUBERNETES · OBSERVABILITY</span>
+        <h3>K8s 集群与可观测性平台</h3>
+        <p>kubeadm 部署 v1.34 三节点集群，Helm 安装 Prometheus + Loki，指标和日志在 Grafana 统一查看。</p>
+        <div class="flow"><span>kubeadm</span><em>+</em><span>Ingress</span><em>+</em><span>Helm</span><em>+</em><span>Prometheus</span><em>+</em><span>Loki</span></div>
+        <div class="pit"><b>踩坑：</b>Grafana 内存限制 384Mi 时返回 503，调到 640Mi 解决</div>
+        <span class="more">查看案例 →</span>
+      </a>
+      <a class="proj reveal" href="#">
+        <span class="tag">AUTOMATION</span>
+        <h3>运维自动化工具集</h3>
+        <p>Ansible role 一条命令交付新机器、重复执行 changed=0；Python 调 Prometheus API 出每日巡检报告。</p>
+        <div class="flow"><span>Shell</span><em>·</em><span>Ansible</span><em>·</em><span>Python</span><em>·</em><span>Terraform</span></div>
+        <div class="pit"><b>踩坑：</b>Terraform 少写两个默认值，plan 永远显示有差异</div>
+        <span class="more">查看案例 →</span>
+      </a>
+      <a class="proj reveal" href="#">
+        <span class="tag">HIGH AVAILABILITY</span>
+        <h3>Web 高可用与数据库容灾</h3>
+        <p>Nginx 负载均衡 + Keepalived VIP 自动漂移；MySQL GTID 主从、异地备份与恢复演练。</p>
+        <div class="flow"><span>Nginx</span><em>+</em><span>Keepalived</span><em>+</em><span>MySQL 主从</span><em>+</em><span>告警</span></div>
+        <div class="pit"><b>踩坑：</b>VIP 和 VirtualBox 的 DHCP 地址撞了，改用 .50</div>
+        <span class="more">查看案例 →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="block svc-band" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="kicker">02 / SERVICES</div><h2>我能帮你做什么</h2></div>
+      <p>面向中小企业和工作室，远程或山东省内上门。先免费评估，再按项目报价。</p>
+    </div>
+    <div class="grid3 reveal">
+      <div class="svc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></div><h3>服务器初始化与加固</h3><p>新服务器上线：账号权限、SSH 加固、防火墙、时间同步、基础监控。</p><div class="for">交付：Ansible 脚本 + 文档</div></div>
+      <div class="svc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h3>网站部署与 HTTPS</h3><p>Nginx 反向代理、证书自动续期、负载均衡，旧网站迁移上云。</p><div class="for">适合：官网、内部系统</div></div>
+      <div class="svc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div><h3>数据库备份与容灾</h3><p>MySQL 定时备份、异地副本、主从复制，并实际演练一次恢复。</p><div class="for">交付：备份脚本 + 恢复手册</div></div>
+      <div class="svc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/></svg></div><h3>应用 Docker 化</h3><p>把手工部署的应用改成 Docker Compose，一条命令启动、升级、回退。</p><div class="for">适合：小团队自建系统</div></div>
+      <div class="svc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div><h3>监控告警</h3><p>Prometheus + Grafana 监控服务器和服务，异常推送企业微信。</p><div class="for">交付：看板 + 告警规则</div></div>
+      <div class="svc"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>企业办公 IT</h3><p>11 年老本行：办公网络、终端、虚拟化、ERP 数据处理与脚本自动化。</p><div class="for">适合：50–500 人企业</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="journey">
+  <div class="wrap two">
+    <div class="reveal">
+      <div class="kicker">03 / STACK</div><h2 style="margin-bottom:24px">技术栈</h2>
+      <dl style="margin:0">
+        <div class="stack-row"><dt>系统</dt><dd><span class="chip">Linux</span><span class="chip">systemd</span><span class="chip">VMware</span><span class="chip">Vagrant</span></dd></div>
+        <div class="stack-row"><dt>中间件</dt><dd><span class="chip">Nginx</span><span class="chip">MySQL</span><span class="chip">Redis</span><span class="chip">Keepalived</span></dd></div>
+        <div class="stack-row"><dt>自动化</dt><dd><span class="chip">Shell</span><span class="chip">Python</span><span class="chip">Ansible</span><span class="chip">Terraform</span></dd></div>
+        <div class="stack-row"><dt>容器</dt><dd><span class="chip">Docker</span><span class="chip">Compose</span><span class="chip">Kubernetes</span><span class="chip">Helm</span></dd></div>
+        <div class="stack-row"><dt>交付</dt><dd><span class="chip">Jenkins</span><span class="chip">GitHub Actions</span><span class="chip">Argo CD</span></dd></div>
+        <div class="stack-row"><dt>可观测</dt><dd><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">Alertmanager</span><span class="chip">Loki</span></dd></div>
+      </dl>
+    </div>
+    <div class="reveal">
+      <div class="kicker">04 / JOURNEY</div><h2 style="margin-bottom:28px">成长路线</h2>
+      <ol class="timeline">
+        <li><time>2013 – 2024</time><b>企业 IT 运维</b><p>山东汇金彩钢，500 人制造企业：终端、网络、VMware 私有云、用友 ERP；用 Python 自动化统计和数据导入。</p></li>
+        <li><time>2024 – 2026</time><b>转型准备</b><p>取得 IBM Data Analyst 证书，系统学习 Linux、容器和自动化课程。</p></li>
+        <li><time>2026.09 – 10</time><b>16 个实战项目</b><p>从 Linux 初始化一路做到 K8s GitOps，全部开源在 GitHub。</p></li>
+        <li class="now"><time>NOW</time><b>寻找运维自动化岗位</b><p>山东省内，可随时到岗。<a href="#">查看完整路线图 →</a></p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker" style="color:var(--mint)">05 / CONTACT</div>
+      <h2>招聘或项目合作，<br>欢迎联系</h2>
+      <p class="lead">一般 24 小时内回复。HR 需要电话可先发邮件，我会回复完整简历。</p>
+      <div class="ways">
+        <a class="way" href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><div><b>1105185454@qq.com</b>邮件</div></a>
+        <a class="way" href="#"><span class="qr"></span><div><b>微信</b>扫码添加（正式版放真实二维码）</div></a>
+        <a class="way" href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><div><b>github.com/roccowork</b>全部项目代码与文档</div></a>
+      </div>
+    </div>
+    <form class="reveal" onsubmit="event.preventDefault();this.querySelector('.form-foot span').textContent='原型：正式版提交到 Cloudflare D1，并推送企业微信通知'">
+      <div class="frow">
+        <label>称呼<input placeholder="王经理"></label>
+        <label>公司 / 单位<input placeholder="选填"></label>
+      </div>
+      <label>咨询类型<select><option>招聘面试</option><option>运维项目外包</option><option>办公 IT 支持</option><option>其他</option></select></label>
+      <label>需求描述<textarea placeholder="例如：公司 3 台服务器，想加监控告警和自动备份"></textarea></label>
+      <label>联系方式<input placeholder="手机 / 微信 / 邮箱"></label>
+      <div class="form-foot"><span>Turnstile 防机器人验证 · 不公开任何信息</span><button class="btn btn-mint" style="border:0;cursor:pointer">提交</button></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 刘晓东 · 山东滨州</span>
+    <span class="mono"><span class="ok">●</span> Built with Astro · Deployed on Cloudflare Pages · commit 9ae2b8e</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // pipeline demo
+  const cmd = 'git push origin main', typed = document.getElementById('typed');
+  const stages = [...document.querySelectorAll('#stages .stage')], result = document.getElementById('result');
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  async function run() {
+    if (reduce) { typed.textContent = cmd; stages.forEach(s => { s.className = 'stage ok'; s.querySelector('.st').textContent = 'passed'; }); result.classList.add('show'); return; }
+    for (;;) {
+      typed.textContent = ''; result.classList.remove('show');
+      stages.forEach(s => { s.className = 'stage'; s.querySelector('.st').textContent = 'waiting'; });
+      await sleep(600);
+      for (const ch of cmd) { typed.textContent += ch; await sleep(55); }
+      await sleep(400);
+      const t0 = [4, 38, 6, 12, 21];
+      for (let i = 0; i < stages.length; i++) {
+        stages[i].className = 'stage run'; stages[i].querySelector('.st').textContent = 'running';
+        await sleep(900);
+        stages[i].className = 'stage ok'; stages[i].querySelector('.st').textContent = t0[i] + 's';
+      }
+      result.classList.add('show');
+      await sleep(4200);
+    }
+  }
+  run();
+  // count-up + reveal
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target; io.unobserve(el);
+    if (el.dataset.n) {
+      const n = +el.dataset.n, sup = el.querySelector('sup').outerHTML;
+      if (reduce) { el.innerHTML = n + sup; return; }
+      const t0 = performance.now();
+      const tick = t => { const p = Math.min(1, (t - t0) / 1200), v = Math.round(n * (1 - Math.pow(1 - p, 3))); el.innerHTML = v + sup; if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    } else el.classList.add('in');
+  }), { threshold: .15 });
+  document.querySelectorAll('[data-n],.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
