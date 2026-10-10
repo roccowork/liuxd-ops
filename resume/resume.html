@@ -7,14 +7,16 @@
 @page{size:A4;margin:13mm 14mm 12mm}
 :root{--ink:#15243a;--muted:#52647a;--line:#d5dde8;--accent:#1b8a72;--soft:#eef4f2;--todo:#fff2a8}
 *{box-sizing:border-box}
-body{margin:0;color:var(--ink);font:10pt/1.62 "Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;color:var(--ink);font:10pt/1.55 "Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .todo{background:var(--todo);padding:0 2px}
+/* 公开版（网站下载用）：resume.html?public 隐藏手机号 */
+.public .phone{display:none}
 header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:10px}
 h1{font-size:22pt;letter-spacing:3px;margin:0;line-height:1.1}
 .role{font-size:11.5pt;font-weight:700;color:var(--accent);margin-top:6px}
 .contact{text-align:right;font-size:9pt;color:var(--muted);line-height:1.75}
 .contact b{color:var(--ink);font-weight:600}
-h2{font-size:11.5pt;margin:13px 0 6px;padding-bottom:3px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:8px}
+h2{font-size:11.5pt;margin:11px 0 5px;break-after:avoid;padding-bottom:3px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:8px}
 h2::before{content:"";width:4px;height:11pt;background:var(--accent);align-self:center}
 h2 small{font-size:8pt;font-weight:400;color:var(--muted);letter-spacing:1px}
 ul{margin:0;padding-left:15px}
@@ -24,7 +26,7 @@ li::marker{color:var(--accent)}
 .skills{display:grid;grid-template-columns:62px 1fr;gap:3px 10px;font-size:9.5pt}
 .skills dt{font-weight:700;color:var(--accent)}
 .skills dd{margin:0}
-.item{margin-bottom:9px;break-inside:avoid}
+.item{margin-bottom:7px;break-inside:avoid}
 .item-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .item-head h3{font-size:10.5pt;margin:0}
 .item-head h3 span{font-weight:400;color:var(--muted);font-size:9pt;margin-left:6px}
@@ -33,53 +35,53 @@ li::marker{color:var(--accent)}
 .pit{background:var(--soft);border-radius:4px;padding:3px 8px;margin-top:3px;font-size:9pt;color:var(--muted)}
 .pit b{color:var(--accent)}
 .env{font-size:9pt;color:var(--muted);margin:-1px 0 7px}
-.page2{break-before:page}
 .row{display:flex;justify-content:space-between;gap:10px}
 </style>
+<script>if(location.search.includes('public'))document.documentElement.className='public'</script>
 </head>
 <body>
 
 <header>
   <div>
     <h1>刘晓东</h1>
-    <div class="role">运维工程师（自动化方向） / 运维开发</div>
+    <div class="role">运维工程师（自动化方向）</div>
   </div>
   <div class="contact">
-    <b>15376256820</b> · <b>1105185454@qq.com</b><br>
+    <span class="phone"><b>15376256820</b> · </span><b>1105185454@qq.com</b><br>
     现居山东滨州 · 期望：济南 / 淄博 / 滨州（省内均可） · 随时到岗<br>
-    GitHub：github.com/roccowork · 作品站：<span class="todo">域名待定</span>
+    作品集：liuxd-ops.pages.dev · GitHub：github.com/roccowork
   </div>
 </header>
 
 <h2>个人优势</h2>
 <ul class="summary">
-  <li><b>11 年企业 IT 运维经验</b>：负责 500 人制造企业的 IT 基础设施，覆盖约 100 台终端、VMware 私有云服务器和用友 ERP 系统。</li>
-  <li><b>能写代码解决运维问题</b>：用 Python 把话费统计、ERP 数据批量导入等重复工作自动化；具备 Web 前后端与数据库开发能力。</li>
-  <li><b>系统完成 16 个运维自动化实战项目</b>：从 Linux 初始化、Ansible、Docker、Prometheus 到 kubeadm K8s 与 Jenkins + Argo CD GitOps，全部写成可复现文档，附 210+ 张过程截图，公开在 GitHub。</li>
-  <li><b>重视可验证、可回滚</b>：每个项目都做了故障演练与回滚，并记录踩坑原因和解决办法。</li>
+  <li><b>11 年企业 IT 运维经验</b>：独立负责约 500 人制造企业的 IT 基础设施，包括 3 台物理服务器组成的 VMware 虚拟化平台（承载数十个虚拟桌面）、约 100 台终端、办公网络和用友 ERP。</li>
+  <li><b>能用代码解决运维问题</b>：用 Python 实现 ERP 物料清单（BOM）批量创建和话费自动统计；有 Vue + Django + MySQL 的 Web 开发基础。</li>
+  <li><b>系统完成 16 个运维自动化实战项目</b>：从 Linux 初始化、Ansible、Docker、Prometheus 到 kubeadm 部署 K8s、Jenkins + Argo CD GitOps 发布与回滚。每个项目都写成可复现的文档，包含验证清单、失败场景测试、回滚步骤和踩坑记录，共 210 张过程截图。</li>
 </ul>
 
 <h2>专业技能</h2>
 <dl class="skills">
-  <dt>Linux</dt><dd>熟悉 Ubuntu 系统初始化与安全加固（用户与 sudo、SSH 加固、ufw、systemd、时间同步），能按日志定位服务故障</dd>
-  <dt>中间件</dt><dd>熟悉 Nginx 反向代理与负载均衡、MySQL 8.0 GTID 主从复制与备份恢复、Redis；了解 Keepalived 双机热备与脑裂处理</dd>
-  <dt>自动化</dt><dd>熟悉 Shell、Python（requests、paramiko、argparse）；熟悉 Ansible playbook / role / 模板 / Vault，写过幂等 role；了解 Terraform</dd>
-  <dt>容器</dt><dd>熟悉 Docker、Dockerfile 多阶段构建、Docker Compose；掌握 kubeadm 部署 K8s 集群及 Deployment / Service / Ingress / PV，会用 Helm</dd>
-  <dt>CI/CD</dt><dd>熟悉 Jenkins Pipeline、GitHub Actions、Argo CD（GitOps），能完成构建、镜像推送、自动部署与回滚</dd>
-  <dt>监控日志</dt><dd>熟悉 Prometheus + Grafana + Alertmanager、PromQL 与告警规则；了解 kube-prometheus-stack、Loki</dd>
-  <dt>其他</dt><dd>VMware 虚拟化日常运维；Oracle 数据处理；Web 前后端开发（<span class="todo">技术栈待补充，如 Python/Django、Vue</span>）；数据分析（IBM Data Analyst 证书）</dd>
+  <dt>Linux</dt><dd>熟悉 Ubuntu 系统初始化与安全加固（sudo 授权、SSH 仅密钥登录、ufw、systemd、NTP），能根据日志和报错定位服务故障</dd>
+  <dt>中间件</dt><dd>熟悉 Nginx 反向代理与负载均衡；掌握 MySQL 8.0 GTID 主从复制、mysqldump + binlog 时间点恢复、Redis；实践过 Keepalived 双机热备与脑裂分析</dd>
+  <dt>脚本</dt><dd>熟悉 Python（requests、paramiko、argparse、logging）；掌握 Shell 脚本（函数、退出码、pipefail、cron）</dd>
+  <dt>自动化</dt><dd>掌握 Ansible playbook / role / Jinja2 模板 / Vault，编写过可重复执行的幂等 role；实践过 Terraform（plan / apply / state / 漂移检测）</dd>
+  <dt>容器</dt><dd>掌握 Docker、多阶段构建、Docker Compose；实践过 kubeadm 部署 K8s 集群，Deployment / Service / Ingress / PV 与 Helm</dd>
+  <dt>CI/CD</dt><dd>实践过 Jenkins Pipeline、GitHub Actions、Argo CD（GitOps），打通测试、构建、镜像推送、自动部署与回滚</dd>
+  <dt>监控日志</dt><dd>掌握 Prometheus + Grafana + Alertmanager、PromQL、告警分组 / 抑制 / 静默；实践过 kube-prometheus-stack、Loki</dd>
+  <dt>其他</dt><dd>VMware 虚拟化日常运维；Oracle 数据批量导入；Web 开发（Vue、Django、MySQL）；数据分析（IBM Data Analyst 证书）</dd>
 </dl>
 
 <h2>项目经历 <small>个人实验项目 · 笔记本 VirtualBox + Vagrant 搭建 3–4 台 Ubuntu 22.04 虚拟机 · 2026.09 – 2026.10</small></h2>
-<div class="env">全部文档、配置与截图：github.com/roccowork/ops-lab</div>
+<div class="env">案例详情：liuxd-ops.pages.dev · 流水线代码：github.com/roccowork/labapp</div>
 
 <div class="item">
   <div class="item-head"><h3>GitOps 持续交付流水线</h3><span class="date">综合项目</span></div>
   <div class="tech">GitHub Actions · Jenkins · 私有镜像仓库 · Argo CD · Kubernetes</div>
   <ul>
-    <li>把 Go 应用从“手工构建、手工 kubectl”改为：PR 由 GitHub Actions 跑单元测试，合并后 Jenkins 构建镜像，以“构建号-提交号”打 tag 推送到私有 Registry。</li>
-    <li>Jenkins 使用只能写 GitOps 仓库的最小权限 token 更新镜像 tag；Argo CD 自动同步，开启 prune 与 selfHeal，集群状态始终与 Git 一致。</li>
-    <li>坏版本演练：新 Pod 端口配置错误无法就绪，maxUnavailable=0 保证旧 Pod 持续服务；在 GitOps 仓库 git revert 完成回滚。</li>
+    <li>把 Go 应用从"手工构建、手工 kubectl"改为自动交付：PR 由 GitHub Actions 跑单元测试，合并后 Jenkins 构建镜像，以"构建号-提交号"打 tag 推送到私有 Registry。</li>
+    <li>Jenkins 使用只能写 GitOps 仓库的最小权限 token 更新镜像 tag；Argo CD 自动同步并开启 prune 与 selfHeal，集群状态始终与 Git 一致。</li>
+    <li>坏版本演练：新 Pod 端口配置错误、无法通过就绪探针，maxUnavailable=0 保证旧 Pod 持续服务；在 GitOps 仓库 git revert 后几分钟内完成回滚。</li>
   </ul>
   <div class="pit"><b>踩坑：</b>Argo CD 默认 Redis 镜像来自 ECR Public，国内拉取失败，改为 docker.io 源后恢复。</div>
 </div>
@@ -88,21 +90,21 @@ li::marker{color:var(--accent)}
   <div class="item-head"><h3>Kubernetes 集群搭建与可观测性平台</h3></div>
   <div class="tech">kubeadm v1.34 · containerd · Flannel · Ingress-nginx · Helm · kube-prometheus-stack · Loki · Alloy</div>
   <ul>
-    <li>用 kubeadm 部署三节点集群，配置国内镜像加速；在双网卡环境下指定 kubelet node-ip 与 Flannel 网卡，解决节点 IP 选错问题。</li>
-    <li>部署应用的 Deployment / Service / Ingress / ConfigMap / local PV，通过域名访问。</li>
-    <li>Helm 安装 kube-prometheus-stack + Loki + Alloy，指标与日志在 Grafana 统一查看；编写副本数不足告警规则，为 ingress-nginx 添加 ServiceMonitor。</li>
+    <li>用 kubeadm 部署 1 主 2 从集群并配置国内镜像加速；双网卡环境下指定 kubelet node-ip 与 Flannel 网卡，解决节点 IP 选错问题。</li>
+    <li>用 Deployment / Service / Ingress / ConfigMap / local PV 部署应用，验证自愈、扩缩容、滚动更新与回滚。</li>
+    <li>Helm 安装 kube-prometheus-stack + Loki + Alloy，指标与日志在 Grafana 统一查看；编写副本数不足的 PrometheusRule，为 ingress-nginx 添加 ServiceMonitor。</li>
   </ul>
   <div class="pit"><b>踩坑：</b>Grafana 内存限制 384Mi 时返回 503，调整到 640Mi；chart 自带的 node-exporter 与已有服务抢 9100 端口，改用 9101。</div>
 </div>
 
 <div class="item">
-  <div class="item-head"><h3>运维自动化工具集</h3></div>
-  <div class="tech">Shell · cron · Ansible · Python · Terraform</div>
+  <div class="item-head"><h3>运维自动化与容器化</h3></div>
+  <div class="tech">Shell · cron · Ansible · Python · Docker · Compose · Terraform</div>
   <ul>
-    <li>Shell 巡检脚本由 cron 定时执行生成报告；MySQL 每日自动备份脚本。</li>
-    <li>把系统初始化、Nginx、Redis 部署写成 baseline / web / redis 三个 Ansible role，新机器一条命令交付，重复执行结果 changed=0；敏感变量用 Vault 加密。</li>
-    <li>Python 调用 Prometheus API 生成每日巡检报告并推送到 Alertmanager；用 paramiko + 线程池批量 SSH 执行命令。</li>
-    <li>Terraform（Docker provider）管理容器：plan / apply、扩容、修改配置与漂移检测。</li>
+    <li>Shell 巡检脚本通过 SSH 批量检查磁盘、内存、负载、服务和 MySQL 主从状态，按阈值告警并用退出码对接自动化；MySQL 备份脚本带校验和保留策略（pipefail 防止"假备份"），cron 定时执行。</li>
+    <li>把系统初始化、Nginx、Redis 部署写成 baseline / web / redis 三个 Ansible role，新机器一条命令交付，重复执行 changed=0；敏感变量用 Vault 加密。</li>
+    <li>Python 调用 Prometheus API 生成每日巡检报告并推送到 Alertmanager；用 paramiko + 线程池并发 SSH 执行命令，单台故障不影响整体。</li>
+    <li>Dockerfile 多阶段构建，镜像从约 300MB 精简到约 15MB，非 root 运行并带健康检查；Compose 编排 Nginx + Go + MySQL + Redis，前后端网络隔离，在 1GB 内存主机上稳定运行。</li>
   </ul>
   <div class="pit"><b>踩坑：</b>Terraform 代码未写明 memory_swap、log_opts 的实际值，导致每次 plan 都显示差异；补齐后 plan 无变化。</div>
 </div>
@@ -111,9 +113,9 @@ li::marker{color:var(--accent)}
   <div class="item-head"><h3>Web 高可用与数据库容灾</h3></div>
   <div class="tech">Nginx · MySQL 8.0 · Redis · Keepalived · Prometheus · Grafana · Alertmanager</div>
   <ul>
-    <li>Nginx 反向代理 + 负载均衡；MySQL GTID 主从复制，从库只读；全量备份 + 异地副本，并完成恢复演练。</li>
-    <li>Keepalived 双机热备：Nginx 停止或主机宕机时 VIP 自动漂移到备机；演练脑裂并分析原因。</li>
-    <li>Prometheus 监控所有主机，服务停止约 1 分钟内触发告警。</li>
+    <li>Nginx 反向代理 + 负载均衡；MySQL GTID 主从复制，从库 super_read_only；mysqldump + binlog 实现时间点恢复，完成误删库恢复演练，备份异地保存。</li>
+    <li>Keepalived 双机热备：Nginx 停止或主机宕机时 VIP 秒级漂移到备机；复现脑裂并分析原因。</li>
+    <li>Prometheus + Alertmanager 监控所有主机，配置告警分组、抑制和静默，服务停止约 1 分钟内告警，并发送恢复通知。</li>
   </ul>
   <div class="pit"><b>踩坑：</b>VIP 设为 .100 时与 VirtualBox 网段的 DHCP 服务器地址冲突，改为 .50 解决。</div>
 </div>
@@ -121,25 +123,32 @@ li::marker{color:var(--accent)}
 <h2>工作经历</h2>
 
 <div class="item">
-  <div class="item-head"><h3>山东汇金彩钢有限公司<span>信息技术员 · 约 500 人制造企业</span></h3><span class="date">2013.08 – 2024.07</span></div>
+  <div class="item-head"><h3>运维自动化 · 全职学习与实战</h3><span class="date">2026.09 – 至今</span></div>
   <ul>
-    <li>负责公司约 100 台电脑、打印机及办公网络的日常运维和故障处理，保障生产与办公系统正常运行。</li>
-    <li>维护基于 VMware 的私有云服务器平台（<span class="todo">请补充：虚拟机数量、做过哪些操作，如创建虚拟机、备份、扩容</span>）。</li>
-    <li>支持用友 ERP 系统；编写 Python 脚本把数据批量写入 ERP 的 Oracle 数据库，替代人工逐条录入（<span class="todo">如有：每次多少条、节省多少时间</span>）。</li>
-    <li>编写 Python 脚本自动统计公司话费，替代每月人工汇总（<span class="todo">如有：涉及多少号码、用时从多久降到多久</span>）。</li>
+    <li>按企业常见技术栈完成上述 16 个实战项目，并持续补充故障复盘。</li>
   </ul>
 </div>
 
 <div class="item">
-  <div class="item-head"><h3>职业转型 · 系统学习运维自动化</h3><span class="date">2024.08 – 至今</span></div>
+  <div class="item-head"><h3>灵活就业 · 业余学习数据分析</h3><span class="date">2024.08 – 2026.08</span></div>
   <ul>
-    <li>取得 IBM Data Analyst 专业证书（Coursera）<span class="todo">年份</span>；学习 Linux、K8s、Ansible 等课程，并完成上述 16 个实战项目。<span class="todo">这段空档期请按实际情况确认</span></li>
+    <li>工作之余学习数据分析课程，2026 年取得 IBM Data Analyst 专业证书（Coursera）。</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><h3>山东汇金彩钢有限公司<span>信息技术员 · 约 500 人制造企业</span></h3><span class="date">2013.08 – 2024.07</span></div>
+  <ul>
+    <li>负责公司约 100 台电脑、打印机及办公网络的日常运维和故障处理，保障生产与办公系统正常运行。</li>
+    <li>维护 VMware 虚拟化平台（3 台物理服务器），为数十台瘦客户机提供虚拟桌面：创建虚拟机、删除损坏的虚拟机由平台自动重建、备份虚拟机上的数据库等日常运维。</li>
+    <li>支持用友 ERP：编写 Python 脚本读取数千行 Excel 物料数据，自动在 ERP 中批量创建 BOM，每次向 Oracle 数据库写入数百条记录，替代人工逐条录入。</li>
+    <li>编写 Python 脚本自动汇总每月话费账单（数千行 Excel），替代人工统计。</li>
   </ul>
 </div>
 
 <h2>教育与证书</h2>
 <div class="row"><span><b class="todo">学校名称</b> · <span class="todo">专业</span> · 大专</span><span class="date todo">入学 – 毕业年月</span></div>
-<div class="row"><span>IBM Data Analyst Professional Certificate（Coursera）</span><span class="date todo">年份</span></div>
+<div class="row"><span>IBM Data Analyst Professional Certificate（Coursera）</span><span class="date">2026</span></div>
 
 </body>
 </html>

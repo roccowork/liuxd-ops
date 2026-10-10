@@ -1,0 +1,309 @@
+---
+import Base from '../layouts/Base.astro';
+import PipelinePlayer from '../components/PipelinePlayer.tsx';
+import Contact from '../components/Contact.astro';
+import { cases } from '../data/cases';
+import { profile, stats, skills, journey } from '../data/site';
+
+const arrow = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>';
+const levels = [
+  { name: '熟悉', desc: '长期在工作中使用' },
+  { name: '掌握', desc: '完整做过，能讲清原理' },
+  { name: '实践', desc: '从零搭建并跑通' },
+];
+---
+<Base
+  title="刘晓东 · 运维工程师（自动化方向）"
+  description="11 年企业 IT 运维经验，专注运维自动化：Ansible 批量交付、Prometheus 监控告警、Kubernetes 上的 GitOps 发布与回滚。山东济南 / 淄博 / 滨州，可随时到岗。"
+>
+  <!-- ── 首屏 ───────────────────────────────────── -->
+  <section class="hero dark">
+    <canvas class="scene" data-scene aria-hidden="true"></canvas>
+    <div class="wrap hero-in">
+      <div class="hero-text">
+        <p class="kicker">Ops Automation Engineer</p>
+        <h1>把重复的运维工作，<br>变成<em>可复现、可回滚</em>的代码。</h1>
+        <p class="lead">11 年企业 IT 运维，独立负责过 500 人制造企业的服务器、虚拟化与 ERP。现在专注运维自动化：Ansible 批量交付、Prometheus 监控告警，以及 Kubernetes 上的 GitOps 发布与回滚。</p>
+        <div class="cta">
+          <a class="btn btn-gold" href="#cases">查看项目案例 <Fragment set:html={arrow} /></a>
+          <a class="btn btn-line" href={profile.resumePdf} download>下载简历 PDF</a>
+        </div>
+        <p class="avail"><i aria-hidden="true"></i>可随时到岗 · {profile.cities.join(' / ')}</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <dl class="stats">
+        {stats.map((s) => (
+          <div>
+            <dt><b data-count={s.n}>{s.n}</b><span>{s.unit}</span></dt>
+            <dd>{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── 交付演示 ───────────────────────────────── -->
+  <section class="block" id="pipeline">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="kicker">01 · Delivery</p>
+        <h2>从一次 git push 到上线，<br>再到一次 git revert 回滚</h2>
+        <p class="sub">这段动画演示的是我在实验环境中搭建并实际跑通的交付流程。代码合并后自动测试、构建和发布；坏版本被就绪探针拦住，用户无感知。</p>
+      </div>
+      <div class="player reveal">
+        <PipelinePlayer client:only="react">
+          <div slot="fallback" class="pp"><div class="pp-screen"></div><div class="pp-bar" style="height:61px"></div></div>
+        </PipelinePlayer>
+      </div>
+      <ul class="facts reveal">
+        <li><b>可追溯</b>镜像 tag 采用「构建号-提交号」，线上任何版本都能对应到一次代码提交。</li>
+        <li><b>不中断</b>maxUnavailable 设为 0，加上就绪探针，新版本不健康时旧版本继续服务。</li>
+        <li><b>可回滚</b>线上状态以 Git 为准，回滚就是一次 git revert，有记录、可审计。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── 项目案例 ───────────────────────────────── -->
+  <section class="block cases-band" id="cases">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="kicker">02 · Case Studies</p>
+        <h2>四个完整案例</h2>
+        <p class="sub">全部在自己搭建的虚拟机集群上从零完成。每个案例都记录了背景、做法、遇到的问题和最终结果。</p>
+      </div>
+      <div class="cases">
+        {cases.map((c) => (
+          <a class="case reveal" href={`/cases/${c.slug}/`}>
+            <div class="case-top">
+              <span class="no serif">{c.no}</span>
+              <span class="tag mono">{c.tag}</span>
+            </div>
+            <h3>{c.title}</h3>
+            <p>{c.summary}</p>
+            <ul class="chips">{c.chips.map((t) => <li>{t}</li>)}</ul>
+            <span class="more">阅读案例 <Fragment set:html={arrow} /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 能力 ───────────────────────────────────── -->
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="kicker">03 · Capabilities</p>
+        <h2>能力与熟练程度</h2>
+        <p class="sub">按实际经验如实标注，面试时每一项都可以展开讲。</p>
+      </div>
+      <div class="legend reveal">
+        {levels.map((l) => <span><i data-level={l.name}></i><b>{l.name}</b>{l.desc}</span>)}
+      </div>
+      <dl class="skills reveal">
+        {skills.map((s) => (
+          <div class="skill">
+            <dt>{s.area}</dt>
+            <dd>{s.items}</dd>
+            <dd class="lv" data-level={s.level}>{s.level}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── 经历 ───────────────────────────────────── -->
+  <section class="block journey-band" id="journey">
+    <div class="wrap journey">
+      <div class="head reveal">
+        <p class="kicker">04 · Experience</p>
+        <h2>经历</h2>
+        <p class="sub">从工厂机房里的 IT 运维，到用代码管理基础设施。</p>
+        <a class="roadmap" href={profile.roadmap} target="_blank" rel="noopener">我的运维职业路线图 <Fragment set:html={arrow} /></a>
+      </div>
+      <ol class="timeline reveal">
+        {journey.map((j) => (
+          <li class:list={{ now: j.now }}>
+            <time class="mono">{j.time}</time>
+            <b>{j.title}</b>
+            <p>{j.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <Contact />
+</Base>
+
+<script>
+  // three.js 体积较大，动态加载，不阻塞首屏
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-scene]');
+  if (canvas) import('../lib/constellation').then((m) => m.initConstellation(canvas));
+
+  // 数字递增
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+  if (!reduce) {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      const el = e.target as HTMLElement, n = Number(el.dataset.count), t0 = performance.now();
+      const tick = (t: number) => {
+        const p = Math.min(1, (t - t0) / 1400);
+        el.textContent = String(Math.round(n * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      el.textContent = '0';
+      requestAnimationFrame(tick);
+    }), { threshold: 0.6 });
+    counters.forEach((el) => io.observe(el));
+  }
+</script>
+
+<style>
+  /* 首屏 */
+  .hero {
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(1100px 620px at 78% 30%, #15294a 0%, transparent 62%),
+      radial-gradient(700px 420px at 0% 100%, rgba(210, 177, 122, 0.07), transparent 60%),
+      var(--navy-900);
+    color: var(--on-dark);
+  }
+  .scene {
+    position: absolute; top: 0; right: -7%; width: 62%; height: 100%;
+    opacity: 0; transition: opacity 1.6s ease;
+  }
+  .scene:global(.ready) { opacity: 1; }
+  .hero-in { position: relative; min-height: min(86vh, 820px); display: flex; align-items: center; padding-top: 120px; padding-bottom: 72px; }
+  .hero-text { max-width: 780px; }
+  h1 {
+    font-size: clamp(32px, 4.2vw, 54px); line-height: 1.32; color: #fff;
+    margin: 26px 0 26px; letter-spacing: 0.02em;
+  }
+  h1 em { font-style: normal; color: var(--gold); }
+  .lead { font-size: 17px; line-height: 1.9; color: var(--on-dark-2); margin: 0 0 40px; max-width: 560px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; }
+  .avail { margin: 36px 0 0; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--on-dark-3); letter-spacing: 0.06em; }
+  .avail i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(95, 174, 140, 0.18); }
+
+  .stats { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; border-top: 1px solid var(--navy-line); }
+  .stats > div { padding: 30px 0 34px 28px; border-left: 1px solid var(--navy-line); }
+  .stats > div:first-child { border-left: 0; padding-left: 0; }
+  .stats dt { display: flex; align-items: baseline; gap: 6px; }
+  .stats b { font: 600 44px/1 var(--sans); letter-spacing: -0.02em; color: #fff; font-variant-numeric: tabular-nums; }
+  .stats dt span { font-size: 14px; color: var(--gold); }
+  .stats dd { margin: 10px 0 0; font-size: 13px; color: var(--on-dark-3); letter-spacing: 0.04em; }
+
+  /* 通用区块 */
+  .block { padding: 120px 0; }
+  .head { max-width: 760px; margin-bottom: 56px; }
+  .head h2 { margin-top: 18px; }
+  .sub { margin: 18px 0 0; color: var(--muted); font-size: 16px; line-height: 1.85; }
+
+  /* 交付演示 */
+  .player { box-shadow: 0 40px 80px -30px rgba(10, 20, 36, 0.45); }
+  .facts { list-style: none; margin: 48px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .facts li { color: var(--muted); font-size: 15px; line-height: 1.8; padding-top: 18px; border-top: 1px solid var(--rule); }
+  .facts b { display: block; font: 600 19px var(--serif); color: var(--ink); margin-bottom: 6px; }
+
+  /* 案例 */
+  .cases-band { background: var(--card); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .cases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .case {
+    position: relative; display: flex; flex-direction: column;
+    background: var(--card); padding: 44px 44px 40px; text-decoration: none; color: inherit;
+    transition: background 0.3s;
+  }
+  .case::before { content: ""; position: absolute; left: 0; top: 0; height: 2px; width: 0; background: var(--gold); transition: width 0.5s cubic-bezier(.22,1,.36,1); }
+  .case:hover { background: #fffdf8; }
+  .case:hover::before { width: 100%; }
+  .case-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .no { font-size: 40px; line-height: 1; color: var(--gold); }
+  .tag { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .case h3 { font-size: 24px; line-height: 1.4; margin: 28px 0 14px; }
+  .case p { margin: 0 0 24px; color: var(--muted); font-size: 15px; line-height: 1.85; }
+  .chips { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li { font: 12px/1 var(--mono); padding: 7px 10px; border: 1px solid var(--rule); border-radius: 2px; color: var(--ink-2); }
+  .more { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--gold-ink); letter-spacing: 0.04em; }
+  .more :global(svg) { transition: transform 0.25s; }
+  .case:hover .more :global(svg) { transform: translateX(4px); }
+
+  /* 能力 */
+  .legend { display: flex; flex-wrap: wrap; gap: 12px 32px; margin: -24px 0 28px; font-size: 13px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .legend b { color: var(--ink); font-weight: 600; }
+  .legend i { width: 28px; height: 4px; border-radius: 2px; background: var(--rule); }
+  .legend i[data-level='熟悉'] { background: linear-gradient(90deg, var(--ink) 100%, var(--rule) 0); }
+  .legend i[data-level='掌握'] { background: linear-gradient(90deg, var(--ink) 66%, var(--rule) 0); }
+  .legend i[data-level='实践'] { background: linear-gradient(90deg, var(--ink) 33%, var(--rule) 0); }
+  .skills { margin: 0; border-top: 1px solid var(--ink); }
+  .skill { display: grid; grid-template-columns: 180px 1fr 96px; gap: 24px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  .skill dt { font: 600 17px var(--serif); }
+  .skill dd { margin: 0; color: var(--ink-2); font-size: 15px; }
+  .lv { justify-self: end; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted) !important; }
+  .lv::before { content: ""; width: 48px; height: 4px; border-radius: 2px; background: var(--rule); }
+  .lv[data-level='熟悉']::before { background: linear-gradient(90deg, var(--ink) 100%, var(--rule) 0); }
+  .lv[data-level='掌握']::before { background: linear-gradient(90deg, var(--ink) 66%, var(--rule) 0); }
+  .lv[data-level='实践']::before { background: linear-gradient(90deg, var(--ink) 33%, var(--rule) 0); }
+
+  /* 经历 */
+  .journey-band { background: var(--card); border-top: 1px solid var(--rule); }
+  .journey { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 80px; }
+  .journey .head { margin-bottom: 0; }
+  .roadmap { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; font-size: 14px; color: var(--gold-ink); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li { position: relative; padding: 0 0 40px 40px; }
+  .timeline li::before { content: ""; position: absolute; left: 5px; top: 12px; bottom: -12px; width: 1px; background: var(--rule); }
+  .timeline li:last-child::before { display: none; }
+  .timeline li::after { content: ""; position: absolute; left: 0; top: 7px; width: 11px; height: 11px; border-radius: 50%; background: var(--card); border: 1px solid var(--ink-2); }
+  .timeline li.now::after { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 0 5px rgba(210, 177, 122, 0.22); }
+  .timeline time { font-size: 12px; letter-spacing: 0.1em; color: var(--muted); }
+  .timeline b { display: block; font: 600 19px/1.5 var(--serif); margin: 4px 0 6px; }
+  .timeline p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.85; }
+
+  @media (max-width: 960px) {
+    .scene { width: 100%; right: 0; opacity: 0; }
+    .scene:global(.ready) { opacity: 0.42; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stats > div:nth-child(3) { border-left: 0; padding-left: 0; }
+    .stats > div:nth-child(-n + 2) { border-bottom: 1px solid var(--navy-line); }
+    .facts { grid-template-columns: 1fr; gap: 0; }
+    .facts li { padding: 18px 0; }
+    .cases { grid-template-columns: 1fr; }
+    .journey { grid-template-columns: 1fr; gap: 48px; }
+    .skill { grid-template-columns: 1fr auto; gap: 6px 16px; }
+    .skill dd:not(.lv) { grid-column: 1 / -1; grid-row: 2; }
+    .lv { grid-row: 1; grid-column: 2; }
+  }
+  @media (max-width: 560px) {
+    .block { padding: 80px 0; }
+    .hero-in { min-height: auto; padding-top: 112px; padding-bottom: 56px; }
+    .lead { font-size: 16px; }
+    .stats > div { padding: 22px 0 24px 18px; }
+    .stats b { font-size: 34px; }
+    .case { padding: 32px 22px 30px; }
+    .case h3 { font-size: 21px; margin-top: 22px; }
+  }
+</style>
+
+<style is:global>
+  /* Remotion 播放器外壳（React 组件内的类名） */
+  .pp { background: var(--navy-900); border: 1px solid var(--navy-700); border-radius: 6px; overflow: hidden; }
+  .pp-screen { aspect-ratio: 16 / 9; background: var(--navy-900); }
+  .pp-bar { display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-top: 1px solid var(--navy-line); }
+  .pp-play {
+    flex: none; width: 36px; height: 36px; display: grid; place-items: center;
+    border: 1px solid rgba(210, 177, 122, 0.5); border-radius: 50%; background: none; color: var(--gold); cursor: pointer;
+  }
+  .pp-play:hover { background: var(--gold); color: var(--navy-950); }
+  .pp-chapters { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .pp-chapters button {
+    white-space: nowrap; border: 0; background: none; cursor: pointer;
+    padding: 7px 12px; border-radius: 3px; font: 13px var(--sans); color: var(--on-dark-3);
+  }
+  .pp-chapters button span { margin-right: 6px; font-size: 11px; }
+  .pp-chapters button:hover { color: var(--on-dark); }
+  .pp-chapters button.on { color: var(--gold); background: rgba(210, 177, 122, 0.1); }
+</style>

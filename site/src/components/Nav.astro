@@ -1,0 +1,80 @@
+---
+import { profile } from '../data/site';
+
+interface Props { solid?: boolean }
+const { solid = false } = Astro.props;
+const links = [
+  { href: '/#cases', label: '项目案例' },
+  { href: '/#pipeline', label: '交付演示' },
+  { href: '/#skills', label: '能力' },
+  { href: '/#journey', label: '经历' },
+  { href: '/#contact', label: '联系' },
+];
+---
+<header class:list={['nav', { solid }]} data-nav>
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="刘晓东 · 首页">
+      <span class="mark" aria-hidden="true">刘</span>
+      <span class="who"><b>{profile.name}</b><small class="mono">OPS AUTOMATION</small></span>
+    </a>
+    <nav aria-label="主导航">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <a class="cv" href={profile.resumePdf} download>
+      简历 PDF
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14"/></svg>
+    </a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed; inset: 0 0 auto; z-index: 50;
+    color: var(--on-dark);
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.scrolled, .nav.solid {
+    background: rgba(10, 20, 36, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: var(--navy-line);
+  }
+  .bar { display: flex; align-items: center; gap: 40px; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .mark {
+    width: 34px; height: 34px; display: grid; place-items: center;
+    border: 1px solid var(--gold); color: var(--gold);
+    font: 600 16px/1 var(--serif);
+  }
+  .who { display: grid; line-height: 1.15; }
+  .who b { font: 600 16px/1.2 var(--serif); letter-spacing: 0.12em; color: #fff; }
+  .who small { font-size: 10px; letter-spacing: 0.22em; color: var(--on-dark-3); }
+  nav { display: flex; gap: 32px; margin-left: auto; }
+  nav a { font-size: 14px; color: var(--on-dark-2); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  nav a:hover { color: #fff; }
+  .cv {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 36px; padding: 0 16px;
+    border: 1px solid rgba(210, 177, 122, 0.55); border-radius: var(--radius);
+    color: var(--gold); font-size: 13px; letter-spacing: 0.06em; text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cv:hover { background: var(--gold); color: var(--navy-950); }
+  @media (max-width: 900px) {
+    nav { display: none; }
+    .cv { margin-left: auto; }
+  }
+  @media (max-width: 420px) {
+    .who small { display: none; }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  if (nav && !nav.classList.contains('solid')) {
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

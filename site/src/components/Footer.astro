@@ -1,0 +1,15 @@
+---
+import { profile } from '../data/site';
+---
+<footer>
+  <div class="wrap row">
+    <span>© 2026 {profile.name} · {profile.location}</span>
+    <span class="mono">Built with Astro · Remotion · three.js — Hosted on Cloudflare Pages</span>
+  </div>
+</footer>
+
+<style>
+  footer { background: var(--navy-950); color: var(--on-dark-3); font-size: 13px; border-top: 1px solid var(--navy-line); }
+  .row { display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-top: 24px; padding-bottom: 24px; }
+  .mono { font-size: 12px; letter-spacing: 0.04em; }
+</style>

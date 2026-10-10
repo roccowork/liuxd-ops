@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="页面不存在 · 刘晓东" description="页面不存在" solidNav>
+  <section class="nf dark">
+    <div class="wrap">
+      <p class="kicker">404 · Not Found</p>
+      <h1>这个页面不存在</h1>
+      <p>链接可能已经变更。</p>
+      <a class="btn btn-gold" href="/">返回首页</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { background: var(--navy-900); color: var(--on-dark); min-height: 80vh; display: flex; align-items: center; padding: 120px 0 80px; }
+  h1 { font-size: clamp(32px, 4vw, 48px); color: #fff; margin: 20px 0 12px; }
+  p:not(.kicker) { color: var(--on-dark-2); margin: 0 0 36px; }
+</style>

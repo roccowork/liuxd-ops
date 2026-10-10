@@ -1,0 +1,113 @@
+---
+import { profile } from '../data/site';
+
+// 在 Cloudflare Pages 配好 Turnstile 和 D1 后，设置这个构建变量即可启用表单（见 README）
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+---
+<section class="contact dark" id="contact">
+  <div class:list={['wrap', 'grid', { solo: !siteKey }]}>
+    <div class="reveal">
+      <p class="kicker">05 · Contact</p>
+      <h2>招聘或合作，<br>欢迎联系</h2>
+      <p class="lead">邮件一般 24 小时内回复。需要电话的话请先发邮件，我会回复完整简历。</p>
+      <div class="ways">
+        <a class="way" href={`mailto:${profile.email}?subject=${encodeURIComponent('招聘联系 · 运维工程师')}`}>
+          <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <span><small>邮件</small><b>{profile.email}</b></span>
+        </a>
+        <a class="way" href={profile.github} target="_blank" rel="noopener">
+          <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></span>
+          <span><small>GitHub · 流水线代码</small><b>github.com/roccowork</b></span>
+        </a>
+        <a class="way" href={profile.resumePdf} download>
+          <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg></span>
+          <span><small>简历</small><b>下载 PDF</b></span>
+        </a>
+      </div>
+    </div>
+
+    {siteKey && (
+      <form class="form reveal" data-contact>
+        <div class="row2">
+          <label>称呼<input name="name" required maxlength="40" autocomplete="name"></label>
+          <label>公司 / 单位<input name="company" maxlength="80" autocomplete="organization" placeholder="选填"></label>
+        </div>
+        <label>联系方式<input name="contact" required maxlength="80" placeholder="邮箱 / 手机 / 微信"></label>
+        <label>留言<textarea name="message" required maxlength="2000" rows="5" placeholder="岗位、团队或需求简介"></textarea></label>
+        <div class="cf-turnstile" data-sitekey={siteKey} data-theme="dark" data-language="zh-cn"></div>
+        <div class="foot">
+          <span class="status" data-status aria-live="polite">信息只用于回复，不会公开。</span>
+          <button class="btn btn-gold" type="submit">发送</button>
+        </div>
+      </form>
+    )}
+  </div>
+</section>
+
+{siteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact]');
+  if (form) {
+    const status = form.querySelector<HTMLElement>('[data-status]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      button.disabled = true;
+      status.textContent = '发送中…';
+      try {
+        const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        if (!res.ok) throw new Error(data.error || '发送失败');
+        form.reset();
+        status.textContent = '已收到，我会尽快回复。';
+      } catch (err) {
+        status.textContent = `${(err as Error).message}，也可以直接发邮件联系我。`;
+        button.disabled = false;
+      }
+      (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+    });
+  }
+</script>
+
+<style>
+  .contact { background: var(--navy-900); color: var(--on-dark); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-top: 120px; padding-bottom: 120px; }
+  .grid.solo { grid-template-columns: 1fr; }
+  .solo .ways { grid-template-columns: repeat(3, 1fr); }
+  h2 { color: #fff; margin-top: 18px; }
+  .lead { color: var(--on-dark-2); margin: 20px 0 40px; max-width: 520px; line-height: 1.85; }
+  .ways { display: grid; gap: 12px; }
+  .way {
+    display: flex; align-items: center; gap: 16px; padding: 18px 20px;
+    border: 1px solid var(--navy-line); border-radius: var(--radius);
+    text-decoration: none; transition: border-color 0.2s, background 0.2s;
+  }
+  .way:hover { border-color: rgba(210, 177, 122, 0.5); background: rgba(255, 255, 255, 0.02); }
+  .ic { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border: 1px solid var(--navy-line); color: var(--gold); }
+  .way small { display: block; font-size: 12px; color: var(--on-dark-3); letter-spacing: 0.06em; }
+  .way b { font-weight: 500; color: #fff; font-size: 15px; word-break: break-all; }
+
+  .form { display: grid; gap: 18px; align-content: start; padding: 36px; background: var(--navy-800); border: 1px solid var(--navy-line); border-radius: var(--radius); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  label { display: grid; gap: 8px; font-size: 13px; color: var(--on-dark-2); letter-spacing: 0.04em; }
+  input, textarea {
+    font: 15px/1.6 var(--sans); color: #fff; background: var(--navy-950);
+    border: 1px solid var(--navy-line); border-radius: var(--radius); padding: 11px 14px;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--gold); }
+  textarea { resize: vertical; min-height: 120px; }
+  .foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .status { font-size: 13px; color: var(--on-dark-3); }
+  button:disabled { opacity: 0.6; cursor: wait; }
+
+  @media (max-width: 960px) {
+    .grid { grid-template-columns: 1fr; gap: 56px; }
+    .solo .ways { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .grid { padding-top: 80px; padding-bottom: 80px; }
+    .form { padding: 24px 18px; }
+    .row2 { grid-template-columns: 1fr; }
+  }
+</style>
