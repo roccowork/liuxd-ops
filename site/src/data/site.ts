@@ -3,7 +3,6 @@ export const profile = {
   role: '运维工程师 · 自动化方向',
   email: '1105185454@qq.com',
   github: 'https://github.com/roccowork',
-  roadmap: 'https://ops-compass.pages.dev',
   resumePdf: '/resume/liuxiaodong-resume.pdf',
   location: '山东滨州',
   cities: ['济南', '淄博', '滨州'],
