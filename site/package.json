@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "validate": "html-validate dist"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.1",
@@ -20,5 +21,8 @@
   },
   "engines": {
     "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "html-validate": "^11.17.0"
   }
 }

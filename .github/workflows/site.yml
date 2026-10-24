@@ -1,0 +1,68 @@
+name: Site
+
+on:
+  pull_request:
+    paths: ['site/**', '.github/workflows/site.yml']
+  push:
+    branches: [main]
+    paths: ['site/**', '.github/workflows/site.yml']
+  schedule:
+    - cron: '17 1 * * 1' # 每周一 09:17（北京时间）查一次外部链接
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: site
+
+jobs:
+  # 注意：Cloudflare Pages 不等这里的结果就会部署，想先检查再上线要走分支 + PR
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: site/.node-version
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm run validate # HTML 校验：缺 alt、重复 id、标签没闭合等
+      - name: 站内链接
+        if: github.event_name == 'pull_request' || github.event_name == 'push'
+        uses: lycheeverse/lychee-action@v2.9.0
+        with:
+          args: --config site/lychee.toml --offline --no-progress --root-dir ${{ github.workspace }}/site/dist 'site/dist/**/*.html'
+      - name: 外部链接
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        uses: lycheeverse/lychee-action@v2.9.0
+        with:
+          args: --config site/lychee.toml --no-progress --root-dir ${{ github.workspace }}/site/dist 'site/dist/**/*.html'
+
+  # global.css、constellation.ts 复制到了 it-site，两边必须一致
+  # it-site 是私有仓库，需要 Secret SHARED_FILES_TOKEN（只读 it-site 的 fine-grained token），没配置时跳过
+  shared-files:
+    runs-on: ubuntu-24.04
+    env:
+      TOKEN: ${{ secrets.SHARED_FILES_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - if: env.TOKEN == ''
+        run: echo "::warning::没有配置 SHARED_FILES_TOKEN，跳过共享文件比对"
+      - if: env.TOKEN != ''
+        uses: actions/checkout@v7.0.1
+        with:
+          repository: roccowork/it-site
+          token: ${{ env.TOKEN }}
+          path: site/.other
+          sparse-checkout: src
+      - if: env.TOKEN != ''
+        run: |
+          rc=0
+          for f in src/styles/global.css src/lib/constellation.ts; do
+            diff -u ".other/$f" "$f" || { echo "::error file=site/$f::和 it-site 的 $f 不一致，两边要同步修改"; rc=1; }
+          done
+          exit $rc

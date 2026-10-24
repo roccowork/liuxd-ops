@@ -20,7 +20,7 @@ npm run build    # 输出到 dist/
 | `src/lib/constellation.ts` | 首屏 three.js 星图 |
 | `functions/api/contact.js` | 联系表单的 Pages Function（Turnstile 校验 → 写 D1 → 推企业微信） |
 | `schema.sql` | D1 留言表 |
-| `public/resume/liuxiaodong-resume.pdf` | 公开版简历（不含手机号），由 `../resume/build-pdf.sh` 生成 |
+| `public/resume/liuxiaodong-resume.pdf` | 公开版简历（不含手机号），由 `../resume/build-pdf.mjs` 生成（CI 自动执行） |
 
 ## 首次部署到 Cloudflare Pages
 
