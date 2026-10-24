@@ -24,7 +24,7 @@ npm run build    # 输出到 dist/
 
 ## 首次部署到 Cloudflare Pages
 
-1. 把 job-kit 推到 GitHub（可以是私有仓库）。
+1. 把 liuxd-ops 推到 GitHub（可以是私有仓库）。
 2. Cloudflare 控制台 → Workers & Pages → Create → Pages → Connect to Git，选这个仓库：
    - Project name：`liuxd-ops`（决定域名 liuxd-ops.pages.dev）
    - Framework preset：Astro
