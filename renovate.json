@@ -1,0 +1,42 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard"
+  ],
+  "timezone": "Asia/Shanghai",
+  "schedule": [
+    "before 9am on monday"
+  ],
+  "prConcurrentLimit": 5,
+  "labels": [
+    "dependencies"
+  ],
+  "packageRules": [
+    {
+      "description": "npm 的小版本和补丁合成一个 PR",
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "npm minor/patch"
+    },
+    {
+      "description": "GitHub Actions 合成一个 PR",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "简历 PDF 用的 playwright 单独升级：换了 Chromium 版本，排版可能变化，合并前看一眼 CI 生成的 PDF",
+      "matchFileNames": [
+        "resume/**"
+      ],
+      "groupName": "resume playwright"
+    }
+  ]
+}

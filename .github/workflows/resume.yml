@@ -1,0 +1,52 @@
+name: Resume PDF
+
+# 改了 resume.html 推到 main 后，自动重新生成两份 PDF 并提交；提交会触发 Cloudflare Pages 重新部署网站
+on:
+  pull_request:
+    paths: ['resume/**', '.github/workflows/resume.yml']
+  push:
+    branches: [main]
+    paths: ['resume/resume.html', 'resume/build-pdf.mjs', 'resume/package*.json', '.github/workflows/resume.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: resume-${{ github.ref }}
+
+defaults:
+  run:
+    working-directory: resume
+
+jobs:
+  pdf:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: resume/package-lock.json
+      # 简历字体是微软雅黑（Windows 自带），Linux 上用思源黑体（Noto Sans CJK SC）代替
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run pdf # 检查 2 页、公开版不带手机号，不通过就失败
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: resume-public
+          path: site/public/resume/liuxiaodong-resume.pdf
+          retention-days: 7
+      - name: 提交新 PDF
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 刘晓东-运维工程师.pdf ../site/public/resume/liuxiaodong-resume.pdf
+          git diff --cached --quiet && { echo '没有变化'; exit 0; }
+          git commit -m 'Rebuild resume PDFs'
+          git push

@@ -1,0 +1,6 @@
+# 链接检查（lychee）。PR 和推送只查站内链接（--offline），每周一再查一次外部链接
+# LinkedIn 对爬虫返回 999，限流返回 429，都不算死链
+accept = ["200..=299", "429", "999"]
+exclude = ["^mailto:"]
+max_retries = 2
+timeout = 20
