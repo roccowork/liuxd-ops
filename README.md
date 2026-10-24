@@ -16,7 +16,5 @@
 
 | 工作流 | 触发 | 做什么 |
 |------|------|------|
-| `site.yml` | 改了 `site/`、每周一 | 构建、HTML 校验、站内链接检查；每周一查外部链接；和 it-site 比对共享的 `global.css`、`constellation.ts` |
+| `site.yml` | 改了 `site/`、每周一 | 构建、HTML 校验、站内链接检查；每周一查外部链接 |
 | `resume.yml` | 改了 `resume/` | 生成简历 PDF 并检查，推到 main 时自动提交 |
-
-共享文件比对需要在仓库 Settings → Secrets 里加 `SHARED_FILES_TOKEN`：fine-grained token，只给 it-site 的 Contents 只读权限；没加时跳过这一项。

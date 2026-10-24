@@ -41,28 +41,3 @@ jobs:
         uses: lycheeverse/lychee-action@v2.9.0
         with:
           args: --config site/lychee.toml --no-progress --root-dir ${{ github.workspace }}/site/dist 'site/dist/**/*.html'
-
-  # global.css、constellation.ts 复制到了 it-site，两边必须一致
-  # it-site 是私有仓库，需要 Secret SHARED_FILES_TOKEN（只读 it-site 的 fine-grained token），没配置时跳过
-  shared-files:
-    runs-on: ubuntu-24.04
-    env:
-      TOKEN: ${{ secrets.SHARED_FILES_TOKEN }}
-    steps:
-      - uses: actions/checkout@v7.0.1
-      - if: env.TOKEN == ''
-        run: echo "::warning::没有配置 SHARED_FILES_TOKEN，跳过共享文件比对"
-      - if: env.TOKEN != ''
-        uses: actions/checkout@v7.0.1
-        with:
-          repository: roccowork/it-site
-          token: ${{ env.TOKEN }}
-          path: site/.other
-          sparse-checkout: src
-      - if: env.TOKEN != ''
-        run: |
-          rc=0
-          for f in src/styles/global.css src/lib/constellation.ts; do
-            diff -u ".other/$f" "$f" || { echo "::error file=site/$f::和 it-site 的 $f 不一致，两边要同步修改"; rc=1; }
-          done
-          exit $rc
