@@ -37,6 +37,24 @@
         "resume/**"
       ],
       "groupName": "resume playwright"
+    },
+    {
+      "description": "补丁版本（如 1.2.3 → 1.2.4）：CI 全部通过后自动合并；小版本、大版本仍然等人看",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "automerge": true
+    },
+    {
+      "description": "所有升级（包括大版本）CI 全部通过后自动合并",
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true
     }
   ]
 }
