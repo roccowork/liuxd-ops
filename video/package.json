@@ -8,9 +8,12 @@
     "poster": "remotion still src/index.ts Showreel ../site/public/video/poster.jpg --frame 150 --image-format jpeg --jpeg-quality 85 --gl=swangle"
   },
   "dependencies": {
+    "@react-three/drei": "10.7.9",
     "@react-three/fiber": "9.8.2",
+    "@react-three/postprocessing": "3.2.2",
     "@remotion/cli": "4.0.538",
     "@remotion/three": "4.0.538",
+    "postprocessing": "6.39.5",
     "react": "19.2.9",
     "react-dom": "19.2.9",
     "remotion": "4.0.538",
