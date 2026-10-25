@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>刘晓东 · 运维工程师</title>
+<meta name="description" content="刘晓东，运维工程师（自动化方向）。11 年企业 IT 运维经验，专注运维自动化。作品集与简历、线上运维平台入口。">
+<link rel="canonical" href="https://liuxd.dev/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="刘晓东 · 运维工程师">
+<meta property="og:description" content="11 年企业 IT 运维，专注运维自动化。">
+<meta property="og:url" content="https://liuxd.dev/">
+<meta name="theme-color" content="#060c17">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23060c17'/%3E%3Crect x='3.5' y='3.5' width='25' height='25' fill='none' stroke='%23d2b17a'/%3E%3Ctext x='16' y='22' font-size='15' text-anchor='middle' fill='%23d2b17a' font-family='serif'%3E%E5%88%98%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #060c17;
+  --bg-2: #0a1424;
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #e9edf3;
+  --muted: #8c97a8;
+  --gold: #d2b17a;
+  --gold-dim: rgba(210, 177, 122, 0.35);
+  --ok: #4fc3a1;
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", serif;
+  --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100vh; min-height: 100svh;
+  display: grid; place-items: center;
+  padding: 48px 16px;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(210, 177, 122, 0.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(79, 195, 161, 0.06), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font: 15px/1.8 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 75%);
+  opacity: 0.5;
+}
+::selection { background: var(--gold); color: var(--bg); }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+
+.card {
+  position: relative; width: 100%; max-width: 640px;
+  padding: 56px 56px 44px;
+  background: linear-gradient(180deg, rgba(15, 29, 51, 0.82), rgba(10, 20, 36, 0.92));
+  border: 1px solid var(--line);
+  box-shadow: 0 40px 120px -40px rgba(0, 0, 0, 0.8);
+  animation: rise 0.9s cubic-bezier(.22, 1, .36, 1) both;
+}
+/* 四角金色描边 */
+.card::before, .card::after {
+  content: ""; position: absolute; width: 22px; height: 22px; border: 1px solid var(--gold);
+}
+.card::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.card::after { right: -1px; bottom: -1px; border-left: 0; border-top: 0; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.top { display: flex; align-items: center; gap: 22px; }
+.mark {
+  flex: none; width: 64px; height: 64px; display: grid; place-items: center;
+  border: 1px solid var(--gold-dim); outline: 1px solid var(--gold-dim); outline-offset: 4px;
+  font: 600 30px/1 var(--serif); color: var(--gold);
+}
+h1 { margin: 0; font: 600 34px/1.2 var(--serif); letter-spacing: 0.18em; }
+.en { margin-top: 6px; font: 12px/1 var(--mono); letter-spacing: 0.32em; color: var(--muted); }
+
+.role { margin: 34px 0 0; font: 500 17px/1.6 var(--serif); color: var(--gold); letter-spacing: 0.08em; }
+.rule { height: 1px; margin: 18px 0 20px; background: linear-gradient(90deg, var(--gold-dim), transparent); }
+.lead { margin: 0; color: var(--muted); }
+.lead b { color: var(--text); font-weight: 500; }
+
+.links { list-style: none; margin: 36px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.links a {
+  display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 4px 14px;
+  padding: 20px 4px; border-bottom: 1px solid var(--line);
+  transition: background 0.3s, padding 0.3s;
+}
+.links a:hover { background: rgba(210, 177, 122, 0.05); padding-left: 12px; }
+.no { font: 12px/1 var(--mono); color: var(--gold); letter-spacing: 0.1em; }
+.name { font: 600 17px/1.5 var(--serif); }
+.url { grid-column: 2; font: 12.5px/1.4 var(--mono); color: var(--muted); letter-spacing: 0.04em; }
+.arrow { grid-row: 1 / span 2; grid-column: 3; color: var(--gold); transition: transform 0.3s; }
+.links a:hover .arrow { transform: translateX(4px); }
+.live {
+  display: inline-flex; align-items: center; gap: 7px; margin-left: 10px;
+  font: 11.5px/1 var(--mono); color: var(--ok); letter-spacing: 0.04em; vertical-align: 2px;
+}
+.live i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 rgba(79, 195, 161, 0.6); animation: pulse 2.4s infinite; }
+.live.stale { color: var(--muted); }
+.live.stale i { background: var(--muted); animation: none; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 7px rgba(79, 195, 161, 0); } 100% { box-shadow: 0 0 0 0 rgba(79, 195, 161, 0); } }
+
+.foot {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+  margin-top: 30px; font-size: 13px; color: var(--muted);
+}
+.foot a { color: var(--text); border-bottom: 1px solid var(--gold-dim); }
+.foot a:hover { border-color: var(--gold); }
+
+@media (max-width: 560px) {
+  body { padding: 24px 16px; }
+  .card { padding: 40px 22px 32px; }
+  .top { gap: 16px; }
+  .mark { width: 52px; height: 52px; font-size: 24px; }
+  h1 { font-size: 27px; letter-spacing: 0.12em; }
+  .en { letter-spacing: 0.22em; }
+  .live { display: flex; margin: 6px 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .live i { animation: none; }
+  .links a, .arrow { transition: none; }
+}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="top">
+    <div class="mark" aria-hidden="true">刘</div>
+    <div>
+      <h1>刘晓东</h1>
+      <div class="en">LIU XIAODONG</div>
+    </div>
+  </div>
+
+  <p class="role">运维工程师 · 自动化方向</p>
+  <div class="rule"></div>
+  <p class="lead"><b>11 年企业 IT 运维经验</b>，独立负责过 500 人制造企业的服务器、虚拟化与 ERP。现在专注运维自动化：把重复的运维工作，变成可复现、可回滚的代码。</p>
+
+  <ul class="links">
+    <li>
+      <a href="https://cv.liuxd.dev/">
+        <span class="no">01</span>
+        <span class="name">作品集与简历</span>
+        <span class="url">cv.liuxd.dev</span>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </a>
+    </li>
+    <li>
+      <a href="https://ops.liuxd.dev/">
+        <span class="no">02</span>
+        <span class="name">线上运维平台<span class="live" data-live hidden><i></i><span data-live-text></span></span></span>
+        <span class="url">ops.liuxd.dev · 自动发布、监控告警、证书与异地备份</span>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </a>
+    </li>
+  </ul>
+
+  <div class="foot">
+    <span>山东 · 济南 / 淄博 / 滨州</span>
+    <a href="mailto:1105185454@qq.com">1105185454@qq.com</a>
+  </div>
+</main>
+
+<script>
+// 平台状态：ops.liuxd.dev 每 10 分钟生成 /status.json（只对 liuxd.dev 开放跨域）。取不到就不显示，不影响页面。
+(async () => {
+  const el = document.querySelector('[data-live]');
+  try {
+    const ctrl = new AbortController();
+    setTimeout(() => ctrl.abort(), 5000);
+    const r = await fetch('https://ops.liuxd.dev/status.json', { signal: ctrl.signal, cache: 'no-store' });
+    if (!r.ok) return;
+    const s = await r.json();
+    const age = Date.now() - new Date(s.generatedAt).getTime();
+    if (!(age >= 0) || age > 60 * 60 * 1000) {
+      el.classList.add('stale');
+      el.querySelector('[data-live-text]').textContent = '状态数据未更新';
+    } else {
+      const a = typeof s.availability7d === 'number' ? ` · 7 天可用率 ${s.availability7d}%` : '';
+      el.querySelector('[data-live-text]').textContent = `运行中${a}`;
+    }
+    el.hidden = false;
+  } catch {}
+})();
+</script>
+</body>
+</html>
