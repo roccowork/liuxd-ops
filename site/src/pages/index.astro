@@ -86,6 +86,15 @@ const levels = [
           </a>
         ))}
       </div>
+      <a class="live reveal" href="https://ops.liuxd.dev" target="_blank" rel="noopener">
+        <div>
+          <span class="tag mono">Production · 长期运行</span>
+          <h3>线上运维平台 ops.liuxd.dev</h3>
+          <p>除了实验环境，我在云服务器上用 k3s 自建了一套长期运行的平台：推送代码自动上线、故障推送企业微信、证书自动续期、数据每天异地加密备份。网站上还整理了一百多个企业自动化案例，标明了哪些在实际运行、哪些是方案设计。</p>
+          <ul class="chips">{['k3s', 'Argo CD', 'GitHub Actions', 'Prometheus', 'cert-manager', 'restic'].map((t) => <li>{t}</li>)}</ul>
+        </div>
+        <span class="more">访问平台 <Fragment set:html={arrow} /></span>
+      </a>
     </div>
   </section>
 
@@ -228,6 +237,17 @@ const levels = [
   .more { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--gold-ink); letter-spacing: 0.04em; }
   .more :global(svg) { transition: transform 0.25s; }
   .case:hover .more :global(svg) { transform: translateX(4px); }
+  .live {
+    position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
+    margin-top: 32px; padding: 40px 44px; background: var(--card); border: 1px solid var(--rule);
+    text-decoration: none; color: inherit; transition: background 0.3s;
+  }
+  .live:hover { background: #fffdf8; }
+  .live h3 { font-size: 24px; line-height: 1.4; margin: 18px 0 14px; }
+  .live p { margin: 0 0 24px; max-width: 760px; color: var(--muted); font-size: 15px; line-height: 1.85; }
+  .live .chips { margin: 0; }
+  .live .more { margin-top: 0; white-space: nowrap; }
+  .live:hover .more :global(svg) { transform: translateX(4px); }
 
   /* 能力 */
   .legend { display: flex; flex-wrap: wrap; gap: 12px 32px; margin: -24px 0 28px; font-size: 13px; color: var(--muted); }
@@ -270,6 +290,7 @@ const levels = [
     .facts { grid-template-columns: 1fr; gap: 0; }
     .facts li { padding: 18px 0; }
     .cases { grid-template-columns: 1fr; }
+    .live { flex-direction: column; align-items: flex-start; gap: 24px; }
     .journey { grid-template-columns: 1fr; gap: 48px; }
     .skill { grid-template-columns: 1fr auto; gap: 6px 16px; }
     .skill dd:not(.lv) { grid-column: 1 / -1; grid-row: 2; }
@@ -282,6 +303,7 @@ const levels = [
     .stats > div { padding: 22px 0 24px 18px; }
     .stats b { font-size: 34px; }
     .case { padding: 32px 22px 30px; }
+    .live { padding: 32px 22px 30px; }
     .case h3 { font-size: 21px; margin-top: 22px; }
   }
 </style>

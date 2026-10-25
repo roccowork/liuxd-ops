@@ -46,6 +46,11 @@ export const journey = [
     text: '在自己搭建的虚拟机集群上，从 Linux 初始化一路做到 Kubernetes GitOps 发布与回滚。',
   },
   {
+    time: '2026.10 – 至今',
+    title: '线上运维平台 ops.liuxd.dev',
+    text: '在云服务器上用 k3s + Argo CD 自建并长期运行：自动发布、监控告警、证书续期和异地备份全部自动化。',
+  },
+  {
     time: 'NOW',
     title: '寻找运维自动化岗位',
     text: '济南、淄博、滨州及山东省内，可随时到岗。',
