@@ -1,6 +1,6 @@
 # liuxd-ops · 个人作品站
 
-Astro 静态站 + Remotion（交付流水线动画）+ three.js（首屏星图），部署到 Cloudflare Pages：<https://liuxd-ops.pages.dev>
+Astro 静态站 + Remotion（交付流水线动画）+ three.js（首屏星图），部署到 Cloudflare Pages：<https://cv.liuxd.dev>（自定义域名，Pages 自带域名 liuxd-ops.pages.dev 仍可访问）
 
 ## 本地开发
 
@@ -35,10 +35,10 @@ npm run build    # 输出到 dist/
 
 ## 启用联系表单（可选）
 
-不做这一步，联系区只显示邮件 / GitHub / 简历三个入口，网站照常可用。
+不做这一步，联系区只显示邮件 / 运维平台 / 简历三个入口，网站照常可用。
 
 1. **D1**：Workers & Pages → D1 → Create database，名字 `liuxd-ops`；打开它的 Console，粘贴 `schema.sql` 执行。
-2. **Turnstile**：Turnstile → Add site，域名填 `liuxd-ops.pages.dev`，拿到 Site Key 和 Secret Key。
+2. **Turnstile**：Turnstile → Add site，域名填 `cv.liuxd.dev` 和 `liuxd-ops.pages.dev`，拿到 Site Key 和 Secret Key。
 3. Pages 项目 → Settings：
    - Bindings → Add → D1 database，变量名 `DB`，选 `liuxd-ops`
    - Variables and Secrets：

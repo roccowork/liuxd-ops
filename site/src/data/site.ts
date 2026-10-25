@@ -2,7 +2,7 @@ export const profile = {
   name: '刘晓东',
   role: '运维工程师 · 自动化方向',
   email: '1105185454@qq.com',
-  github: 'https://github.com/roccowork',
+  platform: 'https://ops.liuxd.dev',
   resumePdf: '/resume/liuxiaodong-resume.pdf',
   location: '山东滨州',
   cities: ['济南', '淄博', '滨州'],

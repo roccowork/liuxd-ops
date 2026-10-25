@@ -2,6 +2,6 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 
 export default defineConfig({
-  site: 'https://liuxd-ops.pages.dev',
+  site: 'https://cv.liuxd.dev',
   integrations: [react()],
 });
