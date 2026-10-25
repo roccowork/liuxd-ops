@@ -1,0 +1,24 @@
+{
+  "name": "liuxd-showreel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts Showreel ../site/public/video/showreel.mp4 --codec h264 --crf 26 --audio-bitrate 128k --gl=swangle",
+    "poster": "remotion still src/index.ts Showreel ../site/public/video/poster.jpg --frame 150 --image-format jpeg --jpeg-quality 85 --gl=swangle"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@remotion/cli": "4.0.538",
+    "@remotion/three": "4.0.538",
+    "react": "19.2.9",
+    "react-dom": "19.2.9",
+    "remotion": "4.0.538",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/three": "0.186.0",
+    "typescript": "7.0.2"
+  }
+}

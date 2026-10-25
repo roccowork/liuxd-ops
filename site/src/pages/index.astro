@@ -26,6 +26,7 @@ const levels = [
         <p class="lead">11 年企业 IT 运维，独立负责过 500 人制造企业的服务器、虚拟化与 ERP。现在专注运维自动化：Ansible 批量交付、Prometheus 监控告警，以及 Kubernetes 上的 GitOps 发布与回滚。</p>
         <div class="cta">
           <a class="btn btn-gold" href="#cases">查看项目案例 <Fragment set:html={arrow} /></a>
+          <a class="btn btn-line" href="#video">▶ 90 秒视频介绍</a>
           <a class="btn btn-line" href={profile.resumePdf} download>下载简历 PDF</a>
         </div>
         <p class="avail"><i aria-hidden="true"></i>可随时到岗 · {profile.cities.join(' / ')}</p>
@@ -40,6 +41,24 @@ const levels = [
           </div>
         ))}
       </dl>
+    </div>
+  </section>
+
+  <!-- ── 视频介绍 ───────────────────────────────── -->
+  <section class="block video-band" id="video">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="kicker">Showreel · 90 秒</p>
+        <h2>90 秒看我做过什么</h2>
+        <p class="sub">生产平台、GitOps 发布与回滚、监控告警、异地备份、16 个实验。画面里的数字都来自实测，实验环境的部分已标注。</p>
+      </div>
+      <div class="reel reveal">
+        <video controls muted playsinline preload="none" poster="/video/poster.jpg" width="1280" height="720">
+          <source src="/video/showreel.mp4" type="video/mp4">
+          你的浏览器不支持视频播放，可以<a href="/video/showreel.mp4">下载视频</a>观看。
+        </video>
+      </div>
+      <p class="reel-note reveal">默认静音，带字幕；点右下角喇叭可以打开配乐。</p>
     </div>
   </section>
 
@@ -212,6 +231,10 @@ const levels = [
 
   /* 交付演示 */
   .player { box-shadow: 0 40px 80px -30px rgba(10, 20, 36, 0.45); }
+  .video-band { padding-bottom: 0; }
+  .reel { background: var(--navy-950); border: 1px solid var(--rule); box-shadow: 0 40px 80px -30px rgba(10, 20, 36, 0.45); }
+  .reel video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .reel-note { margin: 14px 0 0; font-size: 13px; color: var(--muted); }
   .facts { list-style: none; margin: 48px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
   .facts li { color: var(--muted); font-size: 15px; line-height: 1.8; padding-top: 18px; border-top: 1px solid var(--rule); }
   .facts b { display: block; font: 600 19px var(--serif); color: var(--ink); margin-bottom: 6px; }
