@@ -102,7 +102,7 @@ export const Glow = ({ color, intensity = 2.2 }: { color: string; intensity?: nu
 type V3 = [number, number, number];
 
 export const Tile = ({ pos, size, radius = 0.12, children, scale = 1 }: { pos: V3; size: V3; radius?: number; children: ReactNode; scale?: number }) => (
-  <RoundedBox args={size} radius={radius} smoothness={6} position={pos} scale={scale} castShadow receiveShadow>
+  <RoundedBox args={size} radius={Math.max(0.01, Math.min(radius, Math.min(...size) / 2 - 0.005))} smoothness={6} position={pos} scale={scale} castShadow receiveShadow>
     {children}
   </RoundedBox>
 );

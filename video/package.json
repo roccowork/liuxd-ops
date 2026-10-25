@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "studio": "remotion studio src/index.ts",
-    "render": "remotion render src/index.ts Showreel ../site/public/video/showreel.mp4 --codec h264 --crf 26 --audio-bitrate 128k --gl=swangle",
-    "poster": "remotion still src/index.ts Showreel ../site/public/video/poster.jpg --frame 150 --image-format jpeg --jpeg-quality 85 --gl=swangle"
+    "render": "remotion render src/index.ts Showreel ../site/public/video/showreel.mp4 --codec h264 --crf 27 --audio-bitrate 128k --gl=swangle",
+    "poster": "remotion still src/index.ts Showreel ../site/public/video/poster.jpg --frame 470 --image-format jpeg --jpeg-quality 85 --gl=swangle"
   },
   "dependencies": {
     "@react-three/drei": "10.7.9",
