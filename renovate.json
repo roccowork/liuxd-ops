@@ -4,11 +4,12 @@
     "config:recommended",
     ":dependencyDashboard"
   ],
-  "timezone": "Asia/Shanghai",
+  "timezone": "Asia/Singapore",
   "schedule": [
-    "before 9am on monday"
+    "before 9am on the first day of the month"
   ],
-  "prConcurrentLimit": 5,
+  "minimumReleaseAge": "14 days",
+  "prConcurrentLimit": 2,
   "labels": [
     "dependencies"
   ],
@@ -46,15 +47,25 @@
       "automerge": true
     },
     {
-      "description": "所有升级（包括大版本）CI 全部通过后自动合并",
+      "description": "小版本、补丁等 CI 全部通过后自动合并；大版本单独提 PR，等人确认后再合并",
       "matchUpdateTypes": [
-        "major",
         "minor",
         "patch",
         "pin",
         "digest"
       ],
       "automerge": true
+    },
+    {
+      "description": "非大版本的升级全部合成一个 PR：每个 PR 都要跑一次 CI，合在一起最省 Actions 分钟",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
     }
   ]
 }

@@ -7,8 +7,13 @@ on:
     branches: [main]
     paths: ['site/**', '.github/workflows/site.yml']
   schedule:
-    - cron: '17 1 * * 1' # 每周一 09:17（北京时间）查一次外部链接
+    - cron: '17 1 1 * *' # 每月 1 号 09:17（新加坡时间）查一次外部链接；每周查太费 Actions 分钟
   workflow_dispatch:
+
+# 同一个 PR 推新提交时取消旧的运行（私有仓库的 Actions 按分钟计费）
+concurrency:
+  group: site-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
@@ -21,6 +26,7 @@ jobs:
   # 注意：Cloudflare Pages 不等这里的结果就会部署，想先检查再上线要走分支 + PR
   check:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-node@v7.1.0
