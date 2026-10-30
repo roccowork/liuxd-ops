@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>刘晓东 · 求职卡片（发微信群用）</title>
+<!-- 发微信群的求职卡片：1080 宽的长图。生成图片：cd resume && node wechat-card.mjs → out/wechat-card.png
+     不放手机号（群里人多），想联系的人在群里私聊或扫码看简历。二维码指向 https://cv.liuxd.dev -->
+<style>
+:root{--ink:#15243a;--muted:#52647a;--line:#d5dde8;--accent:#1b8a72;--soft:#eef4f2}
+*{box-sizing:border-box}
+body{margin:0;width:1080px;background:#fff;color:var(--ink);font:34px/1.6 "Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif}
+.wrap{padding:72px 72px 64px}
+.tag{display:inline-block;background:var(--accent);color:#fff;font-size:28px;padding:6px 22px;border-radius:999px;letter-spacing:2px}
+h1{font-size:88px;margin:28px 0 0;letter-spacing:8px;line-height:1.15}
+.role{font-size:46px;font-weight:700;color:var(--accent);margin-top:10px}
+.role span{font-size:32px;font-weight:400;color:var(--muted);margin-left:12px}
+.want{margin-top:22px;font-size:34px;color:var(--muted)}
+.want b{color:var(--ink)}
+hr{border:0;border-top:3px solid var(--ink);margin:40px 0 34px}
+h2{font-size:36px;margin:0 0 18px;display:flex;align-items:center;gap:14px}
+h2::before{content:"";width:10px;height:36px;background:var(--accent);border-radius:2px}
+ul{margin:0 0 36px;padding:0;list-style:none}
+li{position:relative;padding-left:40px;margin:14px 0}
+li::before{content:"";position:absolute;left:6px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--accent)}
+li b{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px}
+.chips span{background:var(--soft);font-size:28px;padding:8px 20px;border-radius:10px}
+.foot{display:flex;gap:40px;align-items:center;background:var(--soft);border-radius:24px;padding:36px 40px}
+.foot svg{width:240px;height:240px;flex:none;background:#fff;border-radius:12px}
+.foot .t{font-size:36px;font-weight:700}
+.foot .s{font-size:30px;color:var(--muted);margin-top:8px;line-height:1.55}
+.foot .u{font-size:34px;color:var(--accent);font-weight:700;margin-top:12px}
+</style>
+</head>
+<body><div class="wrap">
+  <span class="tag">求职 · 随时到岗</span>
+  <h1>刘晓东</h1>
+  <div class="role">运维开发工程师<span>自动化 · K8s · AIOps</span></div>
+  <div class="want">期望：<b>济南 / 可远程</b> · 现居山东滨州</div>
+  <hr>
+  <h2>我能做什么</h2>
+  <ul>
+    <li><b>11 年制造企业 IT 运维</b>：独立负责约 500 人企业的服务器、VMware 虚拟化、网络和用友 ERP</li>
+    <li><b>自建线上 K8s 平台</b>：GitOps 推送后 3～4 分钟自动上线、1 分钟回滚；监控告警、证书、备份齐全，长期稳定运行</li>
+    <li><b>Python 开发运维 Agent</b>：收到告警自动排查、给出根因，低风险问题自动处理，高风险推给人确认</li>
+    <li><b>16 个运维实战项目</b>：Ansible、Docker、K8s、Prometheus、Jenkins、Argo CD，都做过故障演练</li>
+  </ul>
+  <h2>技术栈</h2>
+  <div class="chips">
+    <span>Linux</span><span>Python</span><span>Shell</span><span>Docker</span><span>Kubernetes</span><span>Argo CD</span>
+    <span>GitHub Actions</span><span>Jenkins</span><span>Ansible</span><span>Prometheus</span><span>Grafana</span><span>Nginx</span><span>MySQL</span>
+  </div>
+  <div class="foot">
+    <svg viewBox="0 0 290 290" class="segno"><path transform="scale(10)" class="qrline" stroke="#15243a" d="M2 2.5h7m1 0h2m4 0h2m2 0h7m-25 1h1m5 0h1m2 0h3m2 0h3m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m2 0h2m2 0h1m2 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h1m3 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m3 0h3m2 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h4m1 0h1m1 0h1m2 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-17 1h1m1 0h1m3 0h2m-15 1h1m1 0h1m1 0h6m2 0h2m1 0h4m1 0h2m1 0h1m-24 1h2m1 0h2m3 0h1m1 0h1m1 0h2m1 0h1m1 0h1m5 0h1m-22 1h1m1 0h2m1 0h3m6 0h2m4 0h2m-22 1h2m3 0h3m1 0h4m2 0h3m-20 1h6m2 0h1m1 0h2m1 0h2m2 0h1m2 0h1m1 0h2m-24 1h1m1 0h1m1 0h1m1 0h1m2 0h2m1 0h1m3 0h3m1 0h2m1 0h1m-25 1h1m1 0h1m1 0h3m2 0h2m2 0h2m4 0h2m1 0h1m1 0h1m-24 1h2m2 0h1m3 0h1m1 0h1m1 0h6m1 0h1m2 0h1m-24 1h2m2 0h4m2 0h2m2 0h1m1 0h7m-15 1h1m1 0h1m3 0h1m1 0h1m3 0h2m2 0h1m-25 1h7m1 0h3m2 0h4m1 0h1m1 0h2m1 0h2m-25 1h1m5 0h1m1 0h2m1 0h3m2 0h1m3 0h4m-24 1h1m1 0h3m1 0h1m2 0h2m1 0h1m1 0h1m1 0h6m2 0h1m-25 1h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h1m4 0h4m-23 1h1m1 0h3m1 0h1m2 0h2m1 0h2m2 0h1m2 0h2m1 0h1m1 0h1m-25 1h1m5 0h1m1 0h2m1 0h8m2 0h1m-22 1h7m2 0h1m1 0h2m1 0h3m1 0h2m3 0h2"/></svg>
+    <div>
+      <div class="t">扫码看简历和线上作品</div>
+      <div class="s">下载简历 PDF，看实战案例和线上平台<br>有合适的机会，欢迎群里私聊我</div>
+      <div class="u">cv.liuxd.dev</div>
+    </div>
+  </div>
+</div></body>
+</html>
