@@ -1,6 +1,6 @@
 export const profile = {
   name: '刘晓东',
-  role: 'AI 应用开发工程师 · RAG / Agent',
+  role: '运维开发工程师 · 自动化 / AIOps',
   email: '1105185454@qq.com',
   platform: 'https://ops.liuxd.dev',
   resumePdf: '/resume/liuxiaodong-resume.pdf',

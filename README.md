@@ -2,8 +2,8 @@
 
 | 目录 | 内容 |
 |------|------|
-| `resume/resume.html` | 简历源文件（A4 两页）：AI 应用开发工程师，主投 |
-| `resume/resume-ops.html` | 运维版简历，投运维开发、SRE 时用 |
+| `resume/resume-ops.html` | 主投简历（A4 两页）：运维开发工程师（自动化 · K8s · AIOps），网站上下载的公开版也是这份 |
+| `resume/resume.html` | 备用简历：AI 应用开发工程师，投 RAG / Agent 岗位时用 |
 | `resume/build-pdf.mjs` | 用 Chromium 导出 PDF：完整版（带手机号，投递用）+ 公开版（不带手机号，放网站），并检查页数和手机号 |
 | `resume/build-pdf.sh` | 旧方法：在 Windows 上用 Edge 导出（字体是微软雅黑） |
 | `site/` | 个人作品站（Astro + Remotion + three.js），线上地址 cv.liuxd.dev，部署说明见 `site/README.md` |

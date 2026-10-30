@@ -1,8 +1,8 @@
 // 用 Chromium 把简历打印成 PDF（GitHub Actions 里自动执行，本地也能跑：npm ci && RESUME_PHONE=手机号 npm run pdf）
 //
-// 两份简历：resume.html（AI 应用开发，主投）、resume-ops.html（运维，备用）
+// 两份简历：resume-ops.html（运维开发，主投）、resume.html（AI 应用开发，备用）
 //   完整版（带手机号，投递用）→ resume/out/，不提交到仓库（仓库是公开的），在 Actions 运行页面的 Artifacts 里下载
-//   公开版（不带手机号，网站下载用）→ site/public/resume/liuxiaodong-resume.pdf，只出 AI 版
+//   公开版（不带手机号，网站下载用）→ site/public/resume/liuxiaodong-resume.pdf，只出运维开发版
 //
 // 手机号不写在仓库里：从环境变量 RESUME_PHONE 读（CI 里来自仓库的 Secret），打印前填进 [data-phone]。
 // 没有 RESUME_PHONE 时只生成公开版。
@@ -19,12 +19,12 @@ const phone = (process.env.RESUME_PHONE || '').trim();
 const outDir = resolve(here, 'out');
 
 const targets = [
-  { name: 'AI 版公开版', url: `${url('resume.html')}?public`, out: resolve(here, '../site/public/resume/liuxiaodong-resume.pdf'), public: true },
+  { name: '运维开发版公开版', url: `${url('resume-ops.html')}?public`, out: resolve(here, '../site/public/resume/liuxiaodong-resume.pdf'), public: true },
 ];
 if (phone) {
   targets.push(
+    { name: '运维开发版完整版', url: url('resume-ops.html'), out: resolve(outDir, '刘晓东-运维开发工程师.pdf') },
     { name: 'AI 版完整版', url: url('resume.html'), out: resolve(outDir, '刘晓东-AI应用开发工程师.pdf') },
-    { name: '运维版完整版', url: url('resume-ops.html'), out: resolve(outDir, '刘晓东-运维工程师.pdf') },
   );
 } else {
   const msg = '没有 RESUME_PHONE，只生成公开版。要带手机号的完整版：在仓库 Settings → Secrets and variables → Actions 里加 RESUME_PHONE';
