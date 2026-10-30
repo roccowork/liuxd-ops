@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>刘晓东 - 运维工程师（自动化方向）</title>
+<style>
+@page{size:A4;margin:13mm 14mm 12mm}
+:root{--ink:#15243a;--muted:#52647a;--line:#d5dde8;--accent:#1b8a72;--soft:#eef4f2;--todo:#fff2a8}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:10pt/1.55 "Microsoft YaHei","PingFang SC","Noto Sans CJK SC","Segoe UI",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.todo{background:var(--todo);padding:0 2px}
+/* 公开版（网站下载用）：resume.html?public 隐藏手机号 */
+.public .phone{display:none}
+header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2.5px solid var(--ink);padding-bottom:9px;margin-bottom:10px}
+h1{font-size:22pt;letter-spacing:3px;margin:0;line-height:1.1}
+.role{font-size:11.5pt;font-weight:700;color:var(--accent);margin-top:6px}
+.contact{text-align:right;font-size:9pt;color:var(--muted);line-height:1.75}
+.contact b{color:var(--ink);font-weight:600}
+h2{font-size:11.5pt;margin:11px 0 5px;break-after:avoid;padding-bottom:3px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:8px}
+h2::before{content:"";width:4px;height:11pt;background:var(--accent);align-self:center}
+h2 small{font-size:8pt;font-weight:400;color:var(--muted);letter-spacing:1px}
+ul{margin:0;padding-left:15px}
+li{margin:1.5px 0}
+li::marker{color:var(--accent)}
+.summary li b{color:var(--ink)}
+.skills{display:grid;grid-template-columns:62px 1fr;gap:3px 10px;font-size:9.5pt}
+.skills dt{font-weight:700;color:var(--accent)}
+.skills dd{margin:0}
+.item{margin-bottom:7px;break-inside:avoid}
+.item-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.item-head h3{font-size:10.5pt;margin:0}
+.item-head h3 span{font-weight:400;color:var(--muted);font-size:9pt;margin-left:6px}
+.date{font-size:9pt;color:var(--muted);white-space:nowrap;font-family:Consolas,monospace}
+.tech{font-size:8.6pt;color:var(--accent);margin:1px 0 3px}
+.pit{background:var(--soft);border-radius:4px;padding:3px 8px;margin-top:3px;font-size:9pt;color:var(--muted)}
+.pit b{color:var(--accent)}
+a{color:inherit;text-decoration:none}
+.contact a,.env a{color:var(--accent)}
+.env{font-size:9pt;color:var(--muted);margin:-1px 0 7px}
+.row{display:flex;justify-content:space-between;gap:10px}
+</style>
+<script>if(location.search.includes('public'))document.documentElement.className='public'</script>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>刘晓东</h1>
+    <div class="role">运维工程师（自动化方向）</div>
+  </div>
+  <div class="contact">
+    <span class="phone"><b data-phone>手机号（生成 PDF 时从 Secret 填入）</b> · </span><a href="mailto:1105185454@qq.com"><b>1105185454@qq.com</b></a><br>
+    现居山东滨州 · 期望：济南 / 可远程 · 随时到岗<br>
+    作品集：<a href="https://cv.liuxd.dev">cv.liuxd.dev</a> · 运维平台：<a href="https://ops.liuxd.dev">ops.liuxd.dev</a>
+  </div>
+</header>
+
+<h2>个人优势</h2>
+<ul class="summary">
+  <li><b>11 年企业 IT 运维经验</b>：独立负责约 500 人制造企业的 IT 基础设施，包括 3 台物理服务器组成的 VMware 虚拟化平台（承载数十个虚拟桌面）、约 100 台终端、办公网络和用友 ERP。</li>
+  <li><b>能用代码解决运维问题</b>：用 Python 实现 ERP 物料清单（BOM）批量创建和话费自动统计；有 Vue + Django + MySQL 的 Web 开发基础。</li>
+  <li><b>系统完成 16 个运维自动化实战项目</b>：从 Linux 初始化、Ansible、Docker、Prometheus 到 kubeadm 部署 K8s、Jenkins + Argo CD GitOps 发布与回滚。每个项目都写成可复现的文档，包含验证清单、失败场景测试、回滚步骤和踩坑记录，共 210 张过程截图。</li>
+</ul>
+
+<h2>专业技能</h2>
+<dl class="skills">
+  <dt>Linux</dt><dd>熟悉 Ubuntu 系统初始化与安全加固（sudo 授权、SSH 仅密钥登录、ufw、systemd、NTP），能根据日志和报错定位服务故障</dd>
+  <dt>中间件</dt><dd>熟悉 Nginx 反向代理与负载均衡；掌握 MySQL 8.0 GTID 主从复制、mysqldump + binlog 时间点恢复、Redis；实践过 Keepalived 双机热备与脑裂分析</dd>
+  <dt>脚本</dt><dd>熟悉 Python（requests、paramiko、argparse）；掌握 Shell 脚本（函数、退出码、pipefail、cron）</dd>
+  <dt>自动化</dt><dd>掌握 Ansible playbook / role / Jinja2 模板 / Vault，编写过可重复执行的幂等 role；实践过 Terraform（plan / apply / state / 漂移检测）</dd>
+  <dt>容器</dt><dd>掌握 Docker、多阶段构建、Docker Compose；实践过 kubeadm 部署 K8s 集群，Deployment / Service / Ingress / PV 与 Helm</dd>
+  <dt>CI/CD</dt><dd>实践过 Jenkins Pipeline、GitHub Actions、Argo CD（GitOps），打通测试、构建、推送、部署与回滚</dd>
+  <dt>监控日志</dt><dd>掌握 Prometheus + Grafana + Alertmanager、PromQL、告警分组 / 抑制 / 静默；实践过 kube-prometheus-stack、Loki</dd>
+  <dt>其他</dt><dd>VMware 虚拟化日常运维；Oracle 数据批量导入；Web 开发（Vue、Django、MySQL）；数据分析（IBM Data Analyst 证书）</dd>
+</dl>
+
+<h2>线上项目 <small>云服务器长期运行 · 2026.10 – 至今</small></h2>
+
+<div class="item">
+  <div class="item-head"><h3>个人运维平台 <span><a href="https://ops.liuxd.dev">ops.liuxd.dev</a></span></h3><span class="date">生产环境</span></div>
+  <div class="tech">k3s · Traefik · Argo CD · GitHub Actions · kube-prometheus-stack · cert-manager · restic</div>
+  <ul>
+    <li>用 k3s 在 4 核 12G 云服务器上搭建 K8s，承载作品站、AI 服务、私人助理和监控；应用和基础组件都由 Argo CD 从 Git 同步。</li>
+    <li>推送代码后 GitHub Actions 测试、构建镜像并更新部署清单中的 tag，约 3～4 分钟自动上线；CI 访问线上 /version.txt 确认版本，回滚用 git revert 约 1 分钟（实测）。</li>
+    <li>故障经自写的转发服务推到 Telegram，106 秒内收到告警（实测）；运维 Agent 收到告警后自动排查并给出诊断；cert-manager 自动续期证书；restic 每天把数据加密备份到另一家云（R2），失败即告警。</li>
+  </ul>
+  <div class="pit"><b>踩坑：</b>k3s 的 ServiceLB 默认做 SNAT，应用拿不到访客真实 IP；Traefik 改为 externalTrafficPolicy: Local 解决。</div>
+</div>
+
+<h2>项目经历 <small>个人实验项目 · 笔记本 VirtualBox + Vagrant 搭建 3–4 台 Ubuntu 22.04 虚拟机 · 2026.09 – 2026.10</small></h2>
+<div class="env">案例详情：<a href="https://cv.liuxd.dev">cv.liuxd.dev</a> · 流水线代码：<a href="https://github.com/roccowork/labapp">github.com/roccowork/labapp</a></div>
+
+<div class="item">
+  <div class="item-head"><h3>GitOps 持续交付流水线</h3><span class="date">综合项目</span></div>
+  <div class="tech">GitHub Actions · Jenkins · 私有镜像仓库 · Argo CD · Kubernetes</div>
+  <ul>
+    <li>PR 由 GitHub Actions 跑单元测试；合并后 Jenkins 构建镜像，以"构建号-提交号"打 tag 推送到私有 Registry，再用只能写 GitOps 仓库的最小权限 token 更新 tag；Argo CD 开启 prune 与 selfHeal 自动同步。</li>
+    <li>坏版本演练：端口配错的新 Pod 过不了就绪探针，maxUnavailable=0 保证旧 Pod 持续服务；git revert 后几分钟内回滚。</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><h3>Kubernetes 集群搭建与可观测性平台</h3></div>
+  <div class="tech">kubeadm v1.34 · containerd · Flannel · Ingress-nginx · Helm · kube-prometheus-stack · Loki · Alloy</div>
+  <ul>
+    <li>用 kubeadm 部署 1 主 2 从集群并配置国内镜像加速；双网卡环境下指定 kubelet node-ip 与 Flannel 网卡，解决节点 IP 选错问题。</li>
+    <li>用 Deployment / Service / Ingress / ConfigMap / local PV 部署应用，验证自愈、扩缩容、滚动更新与回滚。</li>
+    <li>Helm 安装 kube-prometheus-stack + Loki + Alloy，指标与日志在 Grafana 统一查看；编写副本数不足的 PrometheusRule，为 ingress-nginx 添加 ServiceMonitor。</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><h3>运维自动化与容器化</h3></div>
+  <div class="tech">Shell · cron · Ansible · Python · Docker · Compose · Terraform</div>
+  <ul>
+    <li>Shell 巡检脚本通过 SSH 批量检查磁盘、内存、负载、服务和 MySQL 主从状态，按阈值告警；Python 调 Prometheus API 生成每日巡检报告；MySQL 备份脚本带校验和保留策略（pipefail 防止"假备份"），cron 定时执行。</li>
+    <li>把系统初始化、Nginx、Redis 部署写成 baseline / web / redis 三个 Ansible role，新机器一条命令交付，重复执行 changed=0；敏感变量用 Vault 加密。</li>
+    <li>Dockerfile 多阶段构建，镜像从约 300MB 精简到约 15MB，非 root 运行并带健康检查；Compose 编排 Nginx + Go + MySQL + Redis，前后端网络隔离，在 1GB 内存主机上稳定运行。</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><h3>Web 高可用与数据库容灾</h3></div>
+  <div class="tech">Nginx · MySQL 8.0 · Redis · Keepalived · Prometheus · Grafana · Alertmanager</div>
+  <ul>
+    <li>Nginx 反向代理 + 负载均衡；MySQL GTID 主从复制，从库 super_read_only；mysqldump + binlog 实现时间点恢复，完成误删库恢复演练，备份异地保存。</li>
+    <li>Keepalived 双机热备：Nginx 停止或主机宕机时 VIP 秒级漂移到备机；复现脑裂并分析原因。</li>
+    <li>Prometheus + Alertmanager 监控所有主机，配置告警分组、抑制和静默，服务停止约 1 分钟内告警，并发送恢复通知。</li>
+  </ul>
+</div>
+
+<h2>工作经历</h2>
+
+<div class="item">
+  <div class="item-head"><h3>运维自动化 · 全职学习与实战</h3><span class="date">2026.09 – 至今</span></div>
+  <ul>
+    <li>按企业常见技术栈完成上述 16 个实战项目；自建并持续运维线上平台 ops.liuxd.dev。</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><h3>灵活就业 · 业余学习数据分析</h3><span class="date">2024.08 – 2026.08</span></div>
+  <ul>
+    <li>工作之余学习数据分析课程，2026 年取得 IBM Data Analyst 专业证书（Coursera）。</li>
+  </ul>
+</div>
+
+<div class="item">
+  <div class="item-head"><h3>山东汇金彩钢有限公司<span>信息技术员 · 约 500 人制造企业</span></h3><span class="date">2013.08 – 2024.07</span></div>
+  <ul>
+    <li>负责公司约 100 台电脑、打印机及办公网络的日常运维和故障处理，保障生产与办公系统正常运行。</li>
+    <li>维护 VMware 虚拟化平台（3 台物理服务器），为数十台瘦客户机提供虚拟桌面：创建虚拟机、删除损坏的虚拟机由平台自动重建、备份虚拟机上的数据库等日常运维。</li>
+    <li>支持用友 ERP：编写 Python 脚本读取数千行 Excel 物料数据，自动在 ERP 中批量创建 BOM，每次向 Oracle 数据库写入数百条记录，替代人工逐条录入。</li>
+    <li>编写 Python 脚本自动汇总每月话费账单（数千行 Excel），替代人工统计。</li>
+  </ul>
+</div>
+
+<h2>教育与证书</h2>
+<div class="row"><span><b>山东凯文科技职业学院</b>（现山东工程职业技术大学） · 汽车维修 · 大专</span><span class="date">2006.09 – 2009.08</span></div>
+<div class="row"><span>IBM Data Analyst Professional Certificate（Coursera）</span><span class="date">2026</span></div>
+
+</body>
+</html>

@@ -1,12 +1,14 @@
 name: Resume PDF
 
-# 改了 resume.html 推到 main 后，自动重新生成两份 PDF 并提交；提交会触发 Cloudflare Pages 重新部署网站
+# 改了简历推到 main 后自动生成 PDF：公开版（不带手机号）提交到网站目录，提交会触发 Cloudflare Pages 重新部署；
+# 带手机号的完整版（AI 版、运维版）不提交（仓库是公开的），在这次运行页面的 Artifacts 里下载 resume-full。
+# 手机号来自仓库 Secret RESUME_PHONE
 on:
   pull_request:
     paths: ['resume/**', '.github/workflows/resume.yml']
   push:
     branches: [main]
-    paths: ['resume/resume.html', 'resume/build-pdf.mjs', 'resume/package*.json', '.github/workflows/resume.yml']
+    paths: ['resume/*.html', 'resume/build-pdf.mjs', 'resume/package*.json', '.github/workflows/resume.yml']
   workflow_dispatch:
 
 permissions:
@@ -37,6 +39,14 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run pdf # 检查 2 页、公开版不带手机号，不通过就失败
+        env:
+          RESUME_PHONE: ${{ secrets.RESUME_PHONE }}
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: resume-full
+          path: resume/out/*.pdf
+          if-no-files-found: ignore
+          retention-days: 30
       - uses: actions/upload-artifact@v7.0.2
         with:
           name: resume-public
@@ -47,7 +57,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add 刘晓东-运维工程师.pdf ../site/public/resume/liuxiaodong-resume.pdf
+          git add ../site/public/resume/liuxiaodong-resume.pdf
           git diff --cached --quiet && { echo '没有变化'; exit 0; }
           git commit -m 'Rebuild resume PDFs'
           git push

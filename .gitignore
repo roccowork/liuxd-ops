@@ -1,4 +1,5 @@
 node_modules/
+resume/out/
 dist/
 .astro/
 .wrangler/
