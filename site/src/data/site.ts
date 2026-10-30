@@ -12,7 +12,7 @@ export const stats = [
   { n: 11, unit: '年', label: '企业 IT 运维经验' },
   { n: 16, unit: '个', label: '运维自动化实战项目' },
   { n: 500, unit: '人', label: '规模企业的 IT 独立负责' },
-  { n: 210, unit: '张', label: '过程截图与踩坑记录' },
+  { n: 21, unit: '种', label: '故障场景演练运维 Agent' },
 ];
 
 /** level: 熟悉 = 长期在用；掌握 = 实验中完整做过并能讲清原理；实践 = 搭建并跑通过 */
@@ -27,6 +27,7 @@ export const skills: { area: string; items: string; level: '熟悉' | '掌握' |
   { area: '容器编排', items: 'kubeadm · Kubernetes 核心对象 · Helm · Loki', level: '实践' },
   { area: '持续交付', items: 'Jenkins Pipeline · GitHub Actions · Argo CD', level: '实践' },
   { area: '高可用 / IaC', items: 'Keepalived · Terraform', level: '实践' },
+  { area: 'AIOps', items: '运维 Agent（大模型工具调用）· RAG 运维知识库 · 故障注入评测', level: '实践' },
 ];
 
 export const journey = [
@@ -47,13 +48,13 @@ export const journey = [
   },
   {
     time: '2026.10 – 至今',
-    title: '线上运维平台 ops.liuxd.dev',
-    text: '在云服务器上用 k3s + Argo CD 自建并长期运行：自动发布、监控告警、证书续期和异地备份全部自动化。',
+    title: '线上平台与运维 Agent · ops.liuxd.dev',
+    text: '在云服务器上用 k3s + Argo CD 自建并长期运行：自动发布、监控告警、证书续期和异地备份全部自动化。用 Python 开发运维 Agent，收到告警自动排查、给出根因，低风险问题自动处理。',
   },
   {
     time: 'NOW',
-    title: '寻找运维自动化岗位',
-    text: '济南、淄博、滨州及山东省内，可随时到岗。',
+    title: '寻找运维开发 / SRE 岗位',
+    text: '济南，或远程，可随时到岗。',
     now: true,
   },
 ];

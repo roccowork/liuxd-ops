@@ -13,17 +13,17 @@ const levels = [
 ];
 ---
 <Base
-  title="刘晓东 · 运维工程师（自动化方向）"
-  description="11 年企业 IT 运维经验，专注运维自动化：Ansible 批量交付、Prometheus 监控告警、Kubernetes 上的 GitOps 发布与回滚。山东济南 / 淄博 / 滨州，可随时到岗。"
+  title="刘晓东 · 运维开发工程师（自动化 · K8s · AIOps）"
+  description="11 年企业 IT 运维经验，专注运维自动化和 AIOps：Kubernetes 上的 GitOps 发布与回滚、Prometheus 监控告警、能自动排查告警的运维 Agent。济南或远程，可随时到岗。"
 >
   <!-- ── 首屏 ───────────────────────────────────── -->
   <section class="hero dark">
     <canvas class="scene" data-scene aria-hidden="true"></canvas>
     <div class="wrap hero-in">
       <div class="hero-text">
-        <p class="kicker">Ops Automation Engineer</p>
+        <p class="kicker">DevOps Engineer · AIOps</p>
         <h1>把重复的运维工作，<br>变成<em>可复现、可回滚</em>的代码。</h1>
-        <p class="lead">11 年企业 IT 运维，独立负责过 500 人制造企业的服务器、虚拟化与 ERP。现在专注运维自动化：Ansible 批量交付、Prometheus 监控告警，以及 Kubernetes 上的 GitOps 发布与回滚。</p>
+        <p class="lead">11 年企业 IT 运维，独立负责过 500 人制造企业的服务器、虚拟化与 ERP。现在专注运维自动化和 AIOps：Kubernetes 上的 GitOps 发布与回滚、Prometheus 监控告警，以及能自动排查告警的运维 Agent。</p>
         <div class="cta">
           <a class="btn btn-gold" href="#cases">查看项目案例 <Fragment set:html={arrow} /></a>
           <a class="btn btn-line" href={profile.resumePdf} download>下载简历 PDF</a>
@@ -88,10 +88,10 @@ const levels = [
       </div>
       <a class="live reveal" href="https://ops.liuxd.dev" target="_blank" rel="noopener">
         <div>
-          <span class="tag mono">Production · 长期运行</span>
-          <h3>线上运维平台 ops.liuxd.dev</h3>
-          <p>除了实验环境，我在云服务器上用 k3s 自建了一套长期运行的平台：推送代码自动上线、故障推送企业微信、证书自动续期、数据每天异地加密备份。网站上还整理了一百多个企业自动化案例，标明了哪些在实际运行、哪些是方案设计。</p>
-          <ul class="chips">{['k3s', 'Argo CD', 'GitHub Actions', 'Prometheus', 'cert-manager', 'restic'].map((t) => <li>{t}</li>)}</ul>
+          <span class="tag mono">Production · 长期运行 · 代码公开</span>
+          <h3>线上平台与运维 Agent · ops.liuxd.dev</h3>
+          <p>除了实验环境，我在云服务器上用 k3s 自建了一套长期运行的平台：推送代码约 3～4 分钟自动上线，回滚约 1 分钟；告警推送到 Telegram，证书自动续期，数据每天异地加密备份。平台上跑着我用 Python 开发的运维 Agent：收到告警后自己查 Pod、事件、日志和指标，给出根因；低风险问题自动处理，高风险的推给人确认。还用 21 种故障场景做了演练评测。</p>
+          <ul class="chips">{['k3s', 'Argo CD', 'GitHub Actions', 'Prometheus', '运维 Agent', 'Python · FastAPI'].map((t) => <li>{t}</li>)}</ul>
         </div>
         <span class="more">访问平台 <Fragment set:html={arrow} /></span>
       </a>
