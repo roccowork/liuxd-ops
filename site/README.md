@@ -18,7 +18,7 @@ npm run build    # 输出到 dist/
 | `src/data/cases.ts` | 四个案例的全部内容（架构泳道、做法、问题、结果） |
 | `src/remotion/Delivery.tsx` | 流水线动画（1280×720，30fps，20 秒，四幕） |
 | `src/lib/constellation.ts` | 首屏 three.js 星图 |
-| `functions/api/contact.js` | 联系表单的 Pages Function（Turnstile 校验 → 写 D1 → 推企业微信） |
+| `functions/api/contact.js` | 联系表单的 Pages Function（Turnstile 校验 → 写 D1 → 推企业微信，可选） |
 | `schema.sql` | D1 留言表 |
 | `public/resume/liuxiaodong-resume.pdf` | 公开版简历（不含手机号），由 `../resume/build-pdf.mjs` 生成（CI 自动执行） |
 

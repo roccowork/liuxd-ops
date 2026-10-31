@@ -6,6 +6,7 @@
 | `resume/resume.html` | 备用简历：AI 应用开发工程师，投 RAG / Agent 岗位时用 |
 | `resume/build-pdf.mjs` | 用 Chromium 导出 PDF：完整版（带手机号，投递用）+ 公开版（不带手机号，放网站），并检查页数和手机号 |
 | `resume/build-pdf.sh` | 旧方法：在 Windows 上用 Edge 导出（字体是微软雅黑） |
+| `resume/wechat-card.html` | 发微信求职群用的简历名片；`node wechat-card.mjs` 截成 1080 宽的长图，输出到 `resume/out/wechat-card.png`（不提交） |
 | `site/` | 个人作品站（Astro + Remotion + three.js），线上地址 cv.liuxd.dev，部署说明见 `site/README.md` |
 | `card/` | 名片页（单个静态 HTML），线上地址 liuxd.dev；Cloudflare Pages 单独一个项目：根目录留空，构建命令 `exit 0`，输出目录 `card` |
 | `home-prototype/` | 作品站的早期单页原型，仅作参考 |
